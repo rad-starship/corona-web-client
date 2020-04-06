@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="#">CoronaView</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="/users">Manage Users</a>
+            <a class="dropdown-item" href="/roles">Manage Roles</a>
+            <a class="dropdown-item" href="/tenants">Manage Tenants</a>
+            </div>
+        </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign out</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main">
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">{{ title }}</h1>
+      <p>This website includes information regarding the Corona virus all over the world. In order to view the information you must login with a user assign to a specific role and tenant.
+        Each user will be authenticate and authorize. Authentication means verifying that someone is indeed who they claim to be. Authorization means deciding which resources a certain user should be able to access, and what they should be allowed to do with those resources.
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="/corona" role="button">View Information &raquo;</a></p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h2>Users</h2>
+        <p>User is the person who is logging into and using the CoronaView application. 
+            Every user has one Role assigned to him, which defines his permissions and rights. 
+            User may be, for example, the system administrator of the enterprise, operator, technician or monitor. User belongs to a Tenant groups that define resources he can access. User shall belong to at least one Tenant.</p>
+        <p><a class="btn btn-secondary" href="/users"   role="button">Manage Users &raquo;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <a class="btn btn-secondary" href="/adduser" role="button">Add User &raquo;</a></p>
+        </div>
+      <div class="col-md-4">
+        <h2>Roles</h2>
+        <p>The Role is used to control the access to RV functions or dialogs.
+            The default Roles are: Monitor, Technician, Operator, Administrator. 
+            For each Operation the access level can be: No access, Read only, Full access.
+            </p>
+        <p><a class="btn btn-secondary" href="/roles" role="button">Manage Roles &raquo;</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Tenants</h2>
+        <p>The Tenant is designed to allow/prevent a User access to specific entities. 
+        Tenants are defined by Users and resources that are linked to the respective Tenant.
+        The administrator can create a Tenant that can use to represent a customer or a project and give a user access only to the entities that are define within the tenant.
+            </p>
+        <p><a class="btn btn-secondary" href="/tenants" role="button">Manage Tenants &raquo;</a></p>
+      </div>
+    </div>
+    <hr>
+  </div> <!-- /container -->
+
+  <div class="container">
+      <router-outlet></router-outlet>
+  </div>
