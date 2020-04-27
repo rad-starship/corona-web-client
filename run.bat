@@ -1,1 +1,2 @@
-ng serve --open 
+echo ""
+ng serve --open
