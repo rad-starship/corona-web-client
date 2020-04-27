@@ -3,7 +3,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    
+
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -50,8 +50,8 @@
     <div class="row">
       <div class="col-md-4">
         <h2>Users</h2>
-        <p>User is the person who is logging into and using the CoronaView application. 
-            Every user has one Role assigned to him, which defines his permissions and rights. 
+        <p>User is the person who is logging into and using the CoronaView application.
+            Every user has one Role assigned to him, which defines his permissions and rights.
             User may be, for example, the system administrator of the enterprise, operator, technician or monitor. User belongs to a Tenant groups that define resources he can access. User shall belong to at least one Tenant.</p>
         <p><a class="btn btn-secondary" href="/users"   role="button">Manage Users &raquo;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
            <a class="btn btn-secondary" href="/adduser" role="button">Add User &raquo;</a></p>
@@ -59,14 +59,16 @@
       <div class="col-md-4">
         <h2>Roles</h2>
         <p>The Role is used to control the access to RV functions or dialogs.
-            The default Roles are: Monitor, Technician, Operator, Administrator. 
+            The default Roles are: Monitor, Technician, Operator, Administrator.
             For each Operation the access level can be: No access, Read only, Full access.
             </p>
-        <p><a class="btn btn-secondary" href="/roles" role="button">Manage Roles &raquo;</a></p>
+        <p><a class="btn btn-secondary" href="/roles" role="button">Manage Roles &raquo;</a>
+          <a class="btn btn-secondary" href="/addrole" role="button">Add Role &raquo;</a>
+          <a class="btn btn-secondary" href="/deleterole" role="button">Delete Role &raquo;</a></p>
       </div>
       <div class="col-md-4">
         <h2>Tenants</h2>
-        <p>The Tenant is designed to allow/prevent a User access to specific entities. 
+        <p>The Tenant is designed to allow/prevent a User access to specific entities.
         Tenants are defined by Users and resources that are linked to the respective Tenant.
         The administrator can create a Tenant that can use to represent a customer or a project and give a user access only to the entities that are define within the tenant.
             </p>

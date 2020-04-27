@@ -53,7 +53,7 @@ keycloak.init({ onLoad: "login-required" }).success((auth) => {
 })
 export class AppComponent {
   title: string;
- 
+
   constructor() {
     this.title = 'Coronavirus View';
   }

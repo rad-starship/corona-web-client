@@ -13,6 +13,8 @@ import { TenantListComponent } from './tenant-list/tenant-list.component';
 import { TenantService } from './service/tenant.service';
 import { CoronaListComponent } from './corona-list/corona-list.component';
 import { CoronaService } from './service/corona.service';
+import { RoleFormComponent } from './role-form/role-form.component';
+import { DeleteRoleFormComponent } from './delete-role-form/delete-role-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { CoronaService } from './service/corona.service';
     UserFormComponent,
     RoleListComponent,
     TenantListComponent,
-    CoronaListComponent  ],
+    CoronaListComponent,
+    RoleFormComponent,
+    DeleteRoleFormComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
