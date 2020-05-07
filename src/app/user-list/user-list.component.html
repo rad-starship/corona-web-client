@@ -1,98 +1,80 @@
 <div class="container-fluid">
-  <a class="btn btn-secondary" href="/adduser" role="button">Add User &raquo;</a>
   <div class="row">
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link active" href="\users">
               <span data-feather="home"></span>
-              User List <span class="sr-only">(current)</span>
+              Users List <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="\adduser">
               <span data-feather="file"></span>
-              Orders
+              Add New User
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="shopping-cart"></span>
-              Products
+          </ul>
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Manage Accesss</span>
+            <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+              <span data-feather="plus-circle"></span>
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="users"></span>
-              Customers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="layers"></span>
-              Integrations
-            </a>
-          </li>
-        </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-          <span>Saved reports</span>
-          <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-            <span data-feather="plus-circle"></span>
-          </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Current month
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Last quarter
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Social engagement
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <span data-feather="file-text"></span>
-              Year-end sale
-            </a>
-          </li>
-        </ul>
+          </h6>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" href="/users">
+                <span data-feather="file-text"></span>
+                Users
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/roles">
+                <span data-feather="file-text"></span>
+                Roles
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tenants">
+                <span data-feather="file-text"></span>
+                Tenants
+              </a>
+            </li>
+          </ul>           
       </div>
     </nav>
+  </div>
 
+  <div>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <h2>Users List</h2>
+      <h2>Users List {{clickMessage}}</h2>
+      <td> <button type="button" class="btn btn-success" (click)="onUserAdd(null)">Add User</button></td>
+      <BR> 
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
+              <th scope="col">ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">User Name</th>
               <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col">Tenants</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users" (click)="onRowSelected(user);">
               <td>{{ user.id }}</td>
-              <td>{{ user.name }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.userName }}</td>
               <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+              <td>{{ user.roleId }}</td>
+              <td>{{ user.tenantIds }}</td>
+              <td> <button type="button" class="btn btn-warning" (click)="onUserUpdate(user)">Update</button></td>
+              <td> <button type="button" class="btn btn-danger" (click)="onUserDelete(user)">Delete</button></td>
             </tr>            
           </tbody>
         </table>

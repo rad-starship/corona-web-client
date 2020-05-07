@@ -5,7 +5,7 @@ import { UserService } from '../service/user.service';
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrls: ['./user-list.component.css']
+  styleUrls: ['./../app.component.navbar.css']
 })
 export class UserListComponent implements OnInit {
  
@@ -19,7 +19,27 @@ export class UserListComponent implements OnInit {
     this.userService.findAll().subscribe(data => {
       this.users = data;
       console.log(new Date() + ": " + JSON.stringify(data));
-
     });
+
+    this.users = this.userService.getUsersSample();
   }
+
+  clickMessage = '';
+
+  onUserAdd(user: User) {
+    this.clickMessage = 'onUserAdd ' + user.userName;
+  }
+
+  onUserUpdate(user: User) {
+    this.clickMessage = 'onUserUpdate ' + user.userName;
+  }
+
+  onUserDelete(user: User) {
+    this.clickMessage = 'onUserDelete ' + user.userName;
+  }
+
+  onRowSelected(user: User) {
+    this.clickMessage = 'onRowSelected ' + user.userName;
+  }
+
 }

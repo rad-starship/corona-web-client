@@ -32,7 +32,7 @@ export class SeriersChildModel {
 @Component({
   selector: 'app-corona-list',
   templateUrl: './corona-list.component.html',
-  styleUrls: ['./corona-list.component.css'],
+  styleUrls: ['./../app.component.navbar.css'],
   providers: [NgxChartsModule]
 })
 export class CoronaListComponent implements OnInit {

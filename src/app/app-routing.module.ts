@@ -8,9 +8,9 @@ import { UserFormComponent }      from './user-form/user-form.component';
 
 import { RoleListComponent }      from './role-list/role-list.component';
 import { RoleFormComponent}       from "./role-form/role-form.component";
-import { DeleteRoleFormComponent} from "./delete-role-form/delete-role-form.component";
 
 import { TenantListComponent }    from './tenant-list/tenant-list.component';
+import { TenantFormComponent } from './tenant-form/tenant-form.component';
 
 import { CoronaListComponent }    from './corona-list/corona-list.component';
 
@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'adduser',    component: UserFormComponent },
   { path: 'roles',      component: RoleListComponent },
   { path: 'addrole',    component: RoleFormComponent},
-  { path: 'deleterole', component: DeleteRoleFormComponent},
   { path: 'tenants',    component: TenantListComponent },
+  { path: 'addtenant',  component: TenantFormComponent },
   { path: 'corona',     component: CoronaListComponent }
 ];
 

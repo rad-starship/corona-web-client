@@ -16,6 +16,17 @@ export class TenantService {
     return this.http.get<Tenant[]>(this.tenantsUrl);
   }
 
+  public getTenantsSample() {
+    var list = [];
+    list.push(new Tenant("100", "Admin"));
+    list.push(new Tenant("200", "All"));
+    list.push(new Tenant("301", "America"));
+    list.push(new Tenant("302", "Europe"));
+    list.push(new Tenant("303", "Australia"));
+    list.push(new Tenant("304", "Africa"));
+    return list;
+  }
+
   public save(tenant: Tenant) {
     return this.http.post<Tenant>(this.tenantsUrl, tenant);
   }

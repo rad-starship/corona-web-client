@@ -5,7 +5,7 @@ import { RoleService } from '../service/role.service';
 @Component({
   selector: 'app-role-list',
   templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.css']
+  styleUrls: ['./../app.component.navbar.css']
 })
 export class RoleListComponent implements OnInit {
  
@@ -19,7 +19,8 @@ export class RoleListComponent implements OnInit {
     this.roleService.findAll().subscribe(data => {
       this.roles = data;
       console.log(new Date() + ": " + JSON.stringify(data));
-
     });
+
+    this.roles = this.roleService.getRolesSample();
   }
 }

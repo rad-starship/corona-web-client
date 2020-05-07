@@ -19,6 +19,14 @@ export class RoleService {
     return this.http.get<Role[]>(this.rolesUrl);
   }
 
+  public getRolesSample() {
+    var list = [];
+    list.push(new Role("1", "Admin", ["all"]));
+    list.push(new Role("2", "Region-Admin", ["user_write", "user_read", "role_write", "role_read", "tenant_read", "corona_read"]));
+    list.push(new Role("3", "User", ["user_read", "corona_read"]));
+    return list;
+  }
+
   public save(role: Role) {
     return this.http.post<Role>(this.rolesUrl, role);
   }

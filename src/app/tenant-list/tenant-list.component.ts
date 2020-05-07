@@ -5,7 +5,7 @@ import { TenantService } from '../service/tenant.service';
 @Component({
   selector: 'app-tenant-list',
   templateUrl: './tenant-list.component.html',
-  styleUrls: ['./tenant-list.component.css']
+  styleUrls: ['./../app.component.navbar.css']
 })
 export class TenantListComponent implements OnInit {
  
@@ -20,5 +20,7 @@ export class TenantListComponent implements OnInit {
       this.tenants = data;
       console.log(new Date() + ": " + JSON.stringify(data));
     });
+
+    this.tenants = this.tenantService.getTenantsSample();
   }
 }
