@@ -13,6 +13,7 @@ import { TenantListComponent }    from './tenant-list/tenant-list.component';
 import { TenantFormComponent } from './tenant-form/tenant-form.component';
 
 import { CoronaListComponent }    from './corona-list/corona-list.component';
+import { IsraelOverallComponent } from './corona-list/israel-overall.component';
 
 const routes: Routes = [
   { path: '',           component: HomeComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
   { path: 'addrole',    component: RoleFormComponent},
   { path: 'tenants',    component: TenantListComponent },
   { path: 'addtenant',  component: TenantFormComponent },
-  { path: 'corona',     component: CoronaListComponent }
+  { path: 'corona',     component: CoronaListComponent },
+  { path: 'isrealoverall',     component: IsraelOverallComponent }
 ];
 
 @NgModule({

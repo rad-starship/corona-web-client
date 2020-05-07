@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+//https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { HomeComponent } from './home/home.component';
@@ -22,6 +24,8 @@ import { TenantFormComponent } from './tenant-form/tenant-form.component';
 import { TenantService } from './service/tenant.service';
 
 import { CoronaListComponent } from './corona-list/corona-list.component';
+import { IsraelOverallComponent } from './corona-list/israel-overall.component';
+
 import { CoronaService } from './service/corona.service';
 
 @NgModule({
@@ -34,6 +38,7 @@ import { CoronaService } from './service/corona.service';
     TenantListComponent,
     TenantFormComponent,
     CoronaListComponent,
+    IsraelOverallComponent,
     RoleFormComponent ],
   imports: [
     BrowserModule,

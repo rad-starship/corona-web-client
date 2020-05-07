@@ -3,31 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { CoronaVirus } from '../model/coronaVirus';
 import { CoronaService } from '../service/corona.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
-export class ChartDataModel {
-  public data: SerieModel[];
-  constructor(data:  SerieModel[]) {
-      this.data = data;
-  }
-}
-
-export class SerieModel {
-  public name: string;
-  public series: SeriersChildModel[];
-  constructor(name:  string, series: SeriersChildModel[]) {
-      this.name = name;
-      this.series = series;
-  }
-}
-
-export class SeriersChildModel {
-  public name: string;
-  public value: number;
-  constructor(name:  string, value: number) {
-      this.name = name;
-      this.value = value;
-  }
-}
+import { ChartDataModel } from '../model/chartData';
+import { SerieModel } from '../model/seriel';
+import { SeriersChildModel } from '../model/seriersChild';
 
 @Component({
   selector: 'app-corona-list',
@@ -39,9 +17,9 @@ export class CoronaListComponent implements OnInit {
  
   coronas: CoronaVirus[];
 
-ngxData: ChartDataModel = {
-      data: []
-    };
+  ngxData: ChartDataModel = {
+        data: []
+      };
 
   view: any[] = [800, 600];
 
