@@ -24,6 +24,8 @@ export class UserFormComponent implements OnInit {
   subitMsg = "";
 
   heroForm: FormGroup;
+
+  isEditMode: boolean;
   
   constructor(private router: Router,
               private formBuilder: FormBuilder, 
@@ -31,28 +33,84 @@ export class UserFormComponent implements OnInit {
               private roleService: RoleService,
               private tenantsService: TenantService) 
   {
-    this.model = new User("", "", "", "", "", "", "", []);
+    console.log("raz", userService.userToUpdate);
+    if (userService.userToUpdate === null || 
+      userService.userToUpdate === undefined)
+    {
+      this.model = new User("", "", "", "", "", "", "", []);
+      this.isEditMode = false;
+    }
+    else
+    {
+       this.model = userService.userToUpdate;
+       this.model.password = "*******";
+       this.isEditMode = true;
+    }
+
     this.heroForm = this.formBuilder.group({}); 
   }
 
   ngOnInit() {
-    this.users   = this.userService.getUsersSample();
-    this.roles   = this.roleService.getRolesSample();
-    this.tenants = this.tenantsService.getTenantsSample();
+    this.roleService.findAll().subscribe(res1 => {
+      this.roles = res1;
+
+      this.tenantsService.findAll().subscribe(res2 => {
+        this.tenants = res2;
+
+        this.userService.findAll().subscribe(res3 => {
+          this.users = res3;
+          for (var i = 0; i < this.users.length; i++) {
+            this.users[i].roleName   = this.roleService.getRoleName(this.roles, this.users[i].roleID);
+            this.users[i].tenantName = this.tenantsService.getTenantsName(this.tenants, this.users[i].tenantsID);
+          }   
+        });        
+      });
+    });
   } 
  
   onSubmit() 
   {
     this.submitted = true;
-    console.log(this.model);
-    this.subitMsg = 'User ' + this.model.userName + ' has been created';
-    this.userService.save(this.model);
 
-    setTimeout(() => 
+    if (this.isEditMode)
     {
-      this.router.navigate(['/users']);
-    },
-    3000);
+      console.log("Update user", this.model);
+      this.subitMsg = 'User ' + this.model.userName + ' is under update';
+      this.userService.update(this.model).subscribe(res => { 
+        this.subitMsg = 'User ' + this.model.userName + ' has been updated';
+        console.log("Update user OK", res);
+        setTimeout(() => 
+        {
+          this.router.navigate(['/users']);
+        },
+        2000);
+      },
+      err => {
+        console.log("Update user  Failed", err);
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: ' + JSON.stringify(err);
+      } 
+     ); 
+     this.userService.userToUpdate = null;
+    }
+    else
+    {
+      console.log("Add User", this.model);
+      this.subitMsg = 'User ' + this.model.userName + ' is under creation...';
+      this.userService.save(this.model).subscribe(res => { 
+        this.subitMsg = 'User ' + this.model.userName + ' has been created';
+        console.log("Create user OK", res);
+        setTimeout(() => 
+        {
+          this.router.navigate(['/users']);
+        },
+        2000);      
+      },
+      err => {
+        console.log("Create user  Failed", err);
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + JSON.stringify(err);
+      } 
+     );
+    }
   }
 
   get diagnostic() { 

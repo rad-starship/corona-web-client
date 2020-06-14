@@ -18,9 +18,9 @@ export class TenantListComponent implements OnInit {
     console.log(new Date() + ": " + JSON.stringify("Init Tenants"));
     this.tenantService.findAll().subscribe(data => {
       this.tenants = data;
-      console.log(new Date() + ": " + JSON.stringify(data));
+      console.log("Tenants", new Date() + ": " + JSON.stringify(data));
     });
 
-    this.tenants = this.tenantService.getTenantsSample();
+    //this.tenants = this.tenantService.getTenantsSample();
   }
 }

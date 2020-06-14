@@ -5,17 +5,19 @@ export class User {
     public userName: string;
     public password: string;
     public email: string;    
-    public roleId: string;    
-    public tenantIds: string[];    
+    public roleID: string;
+    public roleName: string;
+    public tenantsID: string[];    
+    public tenantName: string;
 
-    constructor(id: string, firstName: string, lastName: string, userName: string, password: string, email: string, roleId: string, tenantIds: string[]) {
+    constructor(id: string, firstName: string, lastName: string, userName: string, password: string, email: string, roleID: string, tenantsID: string[]) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.email = email;
-        this.roleId = roleId;
-        this.tenantIds = tenantIds;
+        this.roleID = roleID;
+        this.tenantsID = tenantsID;
     }
 }

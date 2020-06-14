@@ -10,13 +10,25 @@ export class RoleService {
   private rolesidUrl: string;
 
   constructor(private http: HttpClient) {
-    this.rolesUrl = 'http://localhost:8086/roles';
-    this.rolesidUrl = 'http://localhost:8086/rolesid';
+    this.rolesUrl = 'http://localhost:8083/roles';
+    this.rolesidUrl = 'http://localhost:8083/rolesid';
   }
 
   public findAll(): Observable<Role[]> {
     console.log("Testing try Get")
     return this.http.get<Role[]>(this.rolesUrl);
+  }
+
+  public getRoleName(roles: Role[], id: string)
+  {    
+    if (roles == null)
+     return "Unknown " + id;
+
+    for (var i = 0; i < roles.length; i++) {
+      if (roles[i].id == id)
+        return roles[i].name;
+    }
+    return "Unknown " + id;
   }
 
   public getRolesSample() {
@@ -39,6 +51,5 @@ export class RoleService {
 
   deleteById(roleId: Number) {
     return this.http.delete(this.rolesidUrl+"/"+roleId);
-
   }
 }

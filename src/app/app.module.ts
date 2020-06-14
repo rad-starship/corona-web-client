@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { AuthService } from './service/auth/auth.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './service/auth/token.interceptor';
+
 import { HomeComponent } from './home/home.component';
 
 import { UserListComponent } from './user-list/user-list.component';
@@ -49,7 +53,18 @@ import { CoronaService } from './service/corona.service';
     BrowserAnimationsModule,
     NgxChartsModule
   ],
-  providers: [UserService, RoleService, TenantService, CoronaService],
+  providers: [
+    UserService, 
+    RoleService, 
+    TenantService, 
+    CoronaService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

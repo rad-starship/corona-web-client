@@ -9,13 +9,29 @@ import { Observable } from 'rxjs/Observable';
 export class UserService {
 
   private usersUrl: string;
+  public userToUpdate : User;
 
   constructor(private http: HttpClient, private roleService: RoleService, private tenantService: TenantService) {
-    this.usersUrl = 'http://localhost:8086/users';
+    this.usersUrl = 'http://localhost:8083/users';
   }
 
   public findAll(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl);
+  }
+
+  public delete(user: User) {
+    console.log("Delete User", user);
+    return this.http.delete<User>(this.usersUrl+"/"+user.id);
+  }
+
+  public update(user: User) {
+    console.log("Update User", user);
+    return this.http.put<User>(this.usersUrl+"/"+user.id, user);
+  }
+
+  public save(user: User) {
+    console.log("Save User", user);
+    return this.http.post<User>(this.usersUrl, user);
   }
 
   public getUsersSample()  {
@@ -38,9 +54,5 @@ export class UserService {
     users.push(new User("207", "--", "--", "americaAfricaUser", "u12", "americaAfricaUser@rad.com", "3", ["302, 304"]));
 
     return users;
-  }
-
-  public save(user: User) {
-    return this.http.post<User>(this.usersUrl, user);
   }
 }

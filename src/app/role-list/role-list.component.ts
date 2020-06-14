@@ -18,9 +18,9 @@ export class RoleListComponent implements OnInit {
     console.log(new Date() + ": " + JSON.stringify("Init Roles"));
     this.roleService.findAll().subscribe(data => {
       this.roles = data;
-      console.log(new Date() + ": " + JSON.stringify(data));
+      console.log("Roles", new Date() + ": " + JSON.stringify(data));
     });
 
-    this.roles = this.roleService.getRolesSample();
+    //this.roles = this.roleService.getRolesSample();
   }
 }
