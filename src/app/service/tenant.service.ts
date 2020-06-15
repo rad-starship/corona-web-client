@@ -8,6 +8,7 @@ import { stringify } from 'querystring';
 export class TenantService {
 
   private tenantsUrl: string;
+  public tenantToUpdate : Tenant;
 
   constructor(private http: HttpClient) {
     this.tenantsUrl = 'http://localhost:8083/tenants';
@@ -16,6 +17,21 @@ export class TenantService {
   public findAll(): Observable<Tenant[]> {
     console.log("Find all Tenants");
     return this.http.get<Tenant[]>(this.tenantsUrl);
+  }
+
+  public delete(tenant: Tenant) {
+    console.log("Delete Tenant", tenant);
+    return this.http.delete<Tenant>(this.tenantsUrl+"/"+tenant.id);
+  }
+
+  public update(tenant: Tenant) {
+    console.log("Update Tenant", tenant);
+    return this.http.put<Tenant>(this.tenantsUrl+"/"+tenant.id, tenant);
+  }
+
+  public save(tenant: Tenant) {
+    console.log("Save Tenant", tenant);
+    return this.http.post<Tenant>(this.tenantsUrl, tenant);
   }
 
   public getTenantsName(tenants: Tenant[], ids: string[])
@@ -47,9 +63,5 @@ export class TenantService {
     list.push(new Tenant("303", "Australia"));
     list.push(new Tenant("304", "Africa"));
     return list;
-  }
-
-  public save(tenant: Tenant) {
-    return this.http.post<Tenant>(this.tenantsUrl, tenant);
   }
 }

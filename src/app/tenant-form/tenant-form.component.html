@@ -56,11 +56,11 @@
         <div *ngIf="heroForm.controls['name'].invalid && (heroForm.controls['name'].dirty || heroForm.controls['name'].touched)" class="alert alert-danger">
           <div *ngIf="heroForm.controls['name'].errors.required">Tenant Name is required</div>
         </div>
-       <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">Add</button>
+        <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">{{buttonName}}</button>
       </form>
       {{subitMsg}}
       <BR><BR>  
     
-      {{diagnostic}}
+      <!--{{diagnostic}}-->
     
 </div>

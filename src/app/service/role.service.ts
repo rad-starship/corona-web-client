@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Role } from '../model/role';
+import { Permission } from '../model/permission';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -8,16 +9,42 @@ export class RoleService {
 
   private rolesUrl: string;
   private rolesidUrl: string;
+  private permissionsUrl: string;
+  
+  public roleToUpdate : Role;
 
   constructor(private http: HttpClient) {
     this.rolesUrl = 'http://localhost:8083/roles';
     this.rolesidUrl = 'http://localhost:8083/rolesid';
+    this.permissionsUrl = 'http://localhost:8083/permissions';
+  }
+
+  public getPermissions(): Observable<Permission[]> {
+    console.log("Find all Permissions");
+    return this.http.get<Permission[]>(this.permissionsUrl);
   }
 
   public findAll(): Observable<Role[]> {
     console.log("Find all Roles");
     return this.http.get<Role[]>(this.rolesUrl);
   }
+
+  public delete(role: Role) {
+    console.log("Delete Role", role);
+    return this.http.delete<Role>(this.rolesUrl+"/"+role.name);
+  }
+
+  public update(role: Role) {
+    console.log("Update Role", role);
+    return this.http.put<Role>(this.rolesUrl+"/"+role.id, role);
+  }
+
+  public save(role: Role) {
+    console.log("Save Role", role);
+    return this.http.post<Role>(this.rolesUrl, role);
+  }
+
+
 
   public getRoleName(roles: Role[], id: string)
   {    
@@ -39,14 +66,9 @@ export class RoleService {
     return list;
   }
 
-  public save(role: Role) {
-    return this.http.post<Role>(this.rolesUrl, role);
-  }
-
   deleteByName(roleName: String) {
-    console.log("Dlete: " +this.rolesUrl+"/"+roleName)
+    console.log("Delete: " +this.rolesUrl+"/"+roleName)
      return this.http.delete(this.rolesUrl+"/"+roleName);
-
   }
 
   deleteById(roleId: Number) {

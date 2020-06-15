@@ -30,8 +30,8 @@ export class AuthService implements OnInit
       var firstAppData = currentAppData[0] || "";
       this.token = firstAppData.token;
       this.refresh_token = firstAppData.refreshToken;
-      console.log("AuthService init Token", this.token);
-      console.log("AuthService init Refresh Token", this.refresh_token);
+      //console.log("AuthService init Token", this.token);
+      //console.log("AuthService init Refresh Token", this.refresh_token);
     }
     
     ngOnInit() {
@@ -50,14 +50,14 @@ export class AuthService implements OnInit
       });
       // insert updated array to local storage
       this.storage.set(this.STORAGE_KEY, currentAppData);
-      console.log(this.storage.get(this.STORAGE_KEY) || 'Local storage is empty');
+      //console.log(this.storage.get(this.STORAGE_KEY) || 'Local storage is empty');
     }
 
     public setToken(access_token: string, refresh_token: string)
     {
       this.token = access_token;
       this.refresh_token = refresh_token;
-      console.log("AuthService setToken", this.token);
+      //console.log("AuthService setToken", this.token);
       this.storeOnLocalStorage(this.token, this.refresh_token);
     }
 

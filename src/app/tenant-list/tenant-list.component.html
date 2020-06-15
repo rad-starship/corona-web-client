@@ -15,6 +15,12 @@
               Add New Tenant
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tenants" (click)="onTenantKeycloak(tenant)">
+              <span data-feather="file-text"></span>
+              Open Keycloak Realm
+            </a>
+          </li>          
           </ul>
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Manage Accesss</span>
@@ -48,9 +54,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <h2>Tenants List</h2>
       <div>
-        <button type="button" class="btn btn-success">Add Tenant</button>&nbsp;&nbsp;&nbsp;
-        <button type="button" class="btn btn-warning">Update Tenant</button>&nbsp;&nbsp;&nbsp;
-        <button type="button" class="btn btn-danger">Delete Tenant</button>
+        <td> <button type="button" class="btn btn-success" (click)="onTenantAdd(null)">Add Tenant</button></td>
       </div>  
       <BR>    
       <div class="table-responsive">
@@ -59,15 +63,20 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>
+              <th scope="col"></th>
+              <th scope="col"></th>        
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tenant of tenants">
+            <tr *ngFor="let tenant of tenants" (click)="onRowSelected(tenant);">
               <td>{{ tenant.id }}</td>
               <td>{{ tenant.name }}</td>
+              <td> <button type="button" class="btn btn-warning" (click)="onTenantUpdate(tenant)">Update</button></td>
+              <td> <button type="button" class="btn btn-danger" (click)="onTenantDelete(tenant)">Delete</button></td>              
             </tr>            
           </tbody>
         </table>
+        {{clickMessage}}
       </div>
     </main>
   </div>

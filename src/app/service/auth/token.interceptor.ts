@@ -20,8 +20,8 @@ export class TokenInterceptor implements HttpInterceptor
       return next.handle(request); 
       
     var token = `Bearer ${this.auth.getToken()}`;
-    console.log("Request adding token ", token);
-    console.log("Request adding token ", request);
+    //console.log("Request adding token ", token);
+    //console.log("Request adding token ", request);
     request = request.clone({
       setHeaders: {
         'Content-Type': 'application/json',

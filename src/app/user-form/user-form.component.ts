@@ -1,3 +1,4 @@
+import { HttpErrorResponse} from '@angular/common/http';
 import { TenantService } from './../service/tenant.service';
 import { RoleService } from './../service/role.service';
 import { Component, OnInit } from '@angular/core';
@@ -34,7 +35,6 @@ export class UserFormComponent implements OnInit {
               private roleService: RoleService,
               private tenantsService: TenantService) 
   {
-    console.log("raz", userService.userToUpdate);
     if (userService.userToUpdate === null || 
       userService.userToUpdate === undefined)
     {
@@ -53,22 +53,7 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.roleService.findAll().subscribe(res1 => {
-      this.roles = res1;
-
-      this.tenantsService.findAll().subscribe(res2 => {
-        this.tenants = res2;
-
-        this.userService.findAll().subscribe(res3 => {
-          this.users = res3;
-          for (var i = 0; i < this.users.length; i++) {
-            this.users[i].roleName   = this.roleService.getRoleName(this.roles, this.users[i].roleID);
-            this.users[i].tenantName = this.tenantsService.getTenantsName(this.tenants, this.users[i].tenantsID);
-          }   
-        });        
-      });
-    });
-  } 
+  }
  
   onSubmit() 
   {
@@ -90,6 +75,17 @@ export class UserFormComponent implements OnInit {
       err => {
         console.log("Update user  Failed", err);
         this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: : ' + err.error.Error;
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.subitMsg = 'Login expired. Redirect to login page...';
+            // redirect to the login route
+            setTimeout(() => 
+            {
+              this.router.navigate(['/']);
+            },
+            2000);   
+          }
+        }                
       } 
      ); 
      this.userService.userToUpdate = null;
@@ -109,7 +105,19 @@ export class UserFormComponent implements OnInit {
       },
       err => {
         console.log("Create user  Failed", err);
-        this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + err.error.Error;
+        var errMsg = err || err.error || err.error.Error;
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + errMsg;
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.subitMsg = 'Login expired. Redirect to login page...';
+            // redirect to the login route
+            setTimeout(() => 
+            {
+              this.router.navigate(['/']);
+            },
+            2000);   
+          }
+        }       
       } 
      );
     }

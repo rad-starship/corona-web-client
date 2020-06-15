@@ -59,14 +59,14 @@
         <div class="form-group">
           <label for="permissions">Permissions</label>
           <select multiple class="form-control" name="permissions" [(ngModel)]="model.permissions" id="permissions" required>
-            <option *ngFor="let permission of permissions" [value]="permission">{{permission}}</option>
+            <option *ngFor="let permission of permissions" [value]="permission.name">{{permission.name}}</option>
           </select>
         </div>    
-        <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">Add</button>
+        <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">{{buttonName}}</button>
       </form>
       {{subitMsg}}
       <BR><BR>  
     
-      {{diagnostic}}
+  <!-- {{diagnostic}} -->
     
 </div>

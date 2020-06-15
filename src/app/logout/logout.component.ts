@@ -39,6 +39,11 @@ export class LogoutComponent implements OnInit {
     err => {
       this.msg = "Logout Failed: " + err.message;
       console.log("Logout Failed", err);
+      setTimeout(() => 
+      {
+        this.router.navigate(['/']);
+      },
+      3000);      
     } 
    );      
   }

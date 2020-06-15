@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse} from '@angular/common/http';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Tenant } from '../model/tenant';
@@ -39,10 +40,23 @@ export class UserListComponent implements OnInit {
           }   
         });        
       });
+    }, err => {
+      console.log("Raz Error", err);
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.clickMessage = 'Login expired. Redirect to login page...';
+          // redirect to the login route
+          setTimeout(() => 
+          {
+            this.router.navigate(['/']);
+          },
+          2000);   
+        }
+      }      
     });
   }
 
-  clickMessage = '';
+  clickMessage = ''; 
 
   onUserAdd(user: User) {
     this.router.navigate(['/adduser']);
@@ -65,8 +79,20 @@ export class UserListComponent implements OnInit {
       2000);
     },
     err => {
-      console.log("Delete user  Failed", err);
-      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + err.error.Error;
+      console.log("Delete user Failed", err);
+      var errMsg = err || err.error || err.error.Error;
+      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + errMsg;
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.clickMessage = 'Login expired. Redirect to login page...';
+          // redirect to the login route
+          setTimeout(() => 
+          {
+            this.router.navigate(['/']);
+          },
+          2000);   
+        }
+      }              
     } 
    );
   }

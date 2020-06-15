@@ -48,9 +48,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <h2>Roles List</h2>
       <div>
-        <button type="button" class="btn btn-success">Add Role</button>&nbsp;&nbsp;&nbsp;
-        <button type="button" class="btn btn-warning">Update Role</button>&nbsp;&nbsp;&nbsp;  
-        <button type="button" class="btn btn-danger">Delete Role</button>
+        <td> <button type="button" class="btn btn-success" (click)="onRoleAdd(null)">Add Role</button></td>
         <BR>    
       </div>
       <BR>
@@ -61,16 +59,21 @@
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Permissions</th>
+              <th scope="col"></th>
+              <th scope="col"></th>              
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let role of roles">
+            <tr *ngFor="let role of roles" (click)="onRowSelected(role);">
               <td>{{ role.id }}</td>
               <td>{{ role.name }}</td>
               <td>{{ role.permissions }}</td>
+              <td> <button type="button" class="btn btn-warning" (click)="onRoleUpdate(role)">Update</button></td>
+              <td> <button type="button" class="btn btn-danger" (click)="onRoleDelete(role)">Delete</button></td>              
             </tr>            
           </tbody>
         </table>
+        {{clickMessage}}
       </div>
     </main>
   </div>
