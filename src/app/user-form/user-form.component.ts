@@ -22,6 +22,7 @@ export class UserFormComponent implements OnInit {
   model: User;
   submitted = false;
   subitMsg = "";
+  buttonName = "Add";
 
   heroForm: FormGroup;
 
@@ -43,8 +44,9 @@ export class UserFormComponent implements OnInit {
     else
     {
        this.model = userService.userToUpdate;
-       this.model.password = "*******";
+       this.model.password = "";
        this.isEditMode = true;
+       this.buttonName = "Update";
     }
 
     this.heroForm = this.formBuilder.group({}); 
@@ -87,7 +89,7 @@ export class UserFormComponent implements OnInit {
       },
       err => {
         console.log("Update user  Failed", err);
-        this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: ' + JSON.stringify(err);
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: : ' + err.error.Error;
       } 
      ); 
      this.userService.userToUpdate = null;
@@ -107,7 +109,7 @@ export class UserFormComponent implements OnInit {
       },
       err => {
         console.log("Create user  Failed", err);
-        this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + JSON.stringify(err);
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + err.error.Error;
       } 
      );
     }

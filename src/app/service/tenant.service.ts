@@ -14,6 +14,7 @@ export class TenantService {
   }
 
   public findAll(): Observable<Tenant[]> {
+    console.log("Find all Tenants");
     return this.http.get<Tenant[]>(this.tenantsUrl);
   }
 

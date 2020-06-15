@@ -89,7 +89,7 @@
         <option *ngFor="let tenant of tenants" [value]="tenant.id">{{tenant.name}}</option>
       </select>
     </div>    
-    <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">Add</button>
+    <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">{{buttonName}}</button>
   </form>
   {{subitMsg}}
   <BR><BR>  

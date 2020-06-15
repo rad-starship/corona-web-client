@@ -60,13 +60,13 @@ export class UserListComponent implements OnInit {
       console.log("Delete user OK", res);
       setTimeout(() => 
       {
-        this.router.navigate(['/']);
+        this.ngOnInit();
       },
       2000);
     },
     err => {
       console.log("Delete user  Failed", err);
-      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + JSON.stringify(err);
+      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + err.error.Error;
     } 
    );
   }

@@ -15,7 +15,7 @@ export class RoleService {
   }
 
   public findAll(): Observable<Role[]> {
-    console.log("Testing try Get")
+    console.log("Find all Roles");
     return this.http.get<Role[]>(this.rolesUrl);
   }
 

@@ -8,10 +8,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CustomMaterialModule } from './core/material.module';
+
+import { CommonModule } from '@angular/common';
 
 import { AuthService } from './service/auth/auth.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './service/auth/token.interceptor';
+import { StorageServiceModule  } from 'ngx-webstorage-service';
 
 import { HomeComponent } from './home/home.component';
 
@@ -31,6 +35,9 @@ import { CoronaListComponent } from './corona-list/corona-list.component';
 import { IsraelOverallComponent } from './corona-list/israel-overall.component';
 
 import { CoronaService } from './service/corona.service';
+import { LoginService } from './service/auth/login.service';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -43,17 +50,23 @@ import { CoronaService } from './service/corona.service';
     TenantFormComponent,
     CoronaListComponent,
     IsraelOverallComponent,
-    RoleFormComponent ],
+    RoleFormComponent,
+    LoginComponent,
+    LogoutComponent ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    CustomMaterialModule,
+    StorageServiceModule 
   ],
   providers: [
+    LoginService,
     UserService, 
     RoleService, 
     TenantService, 

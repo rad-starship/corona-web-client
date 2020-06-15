@@ -15,8 +15,15 @@ import { TenantFormComponent } from './tenant-form/tenant-form.component';
 import { CoronaListComponent }    from './corona-list/corona-list.component';
 import { IsraelOverallComponent } from './corona-list/israel-overall.component';
 
+import {LoginComponent} from './login/login.component';
+import {LogoutComponent} from './logout/logout.component';
+
+
 const routes: Routes = [
-  { path: '',           component: HomeComponent },
+  //{ path: '',           component: HomeComponent },
+  { path : '',          component : LoginComponent} ,
+  { path: 'login',      component: LoginComponent },
+  { path: 'logout',     component: LogoutComponent },
   { path: 'home',       component: HomeComponent },
   { path: 'users',      component: UserListComponent },
   { path: 'adduser',    component: UserFormComponent },
