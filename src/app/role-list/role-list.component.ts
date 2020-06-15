@@ -28,7 +28,13 @@ export class RoleListComponent implements OnInit {
       this.roles = data;
       console.log("Roles", new Date() + ": " + JSON.stringify(data));
     }, err => {
-      var errMsg = err || err.error || err.error.Error;
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }
       this.clickMessage = 'Error Loading Error: ' + errMsg;      
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
@@ -68,7 +74,13 @@ export class RoleListComponent implements OnInit {
     },
     err => {
       console.log("Delete Role Failed", err);
-      var errMsg = err || err.error || err.error.Error;
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }
       this.clickMessage = 'Role ' + role.name + ' has NOT been deleted. Error: ' + errMsg;
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {

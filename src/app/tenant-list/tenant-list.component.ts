@@ -29,8 +29,13 @@ export class TenantListComponent implements OnInit {
       this.tenants = data;
       console.log("Tenants", new Date() + ": " + JSON.stringify(data));
     }, err => {
-      var errMsg = err || err.error || err.error.Error;
-      this.clickMessage = 'Error Loading Error: ' + errMsg;      
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }      this.clickMessage = 'Error Loading Error: ' + errMsg;      
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.clickMessage = 'Login expired. Redirect to login page...';
@@ -73,8 +78,13 @@ export class TenantListComponent implements OnInit {
     },
     err => {
       console.log("Delete Tenant Failed", err);
-      var errMsg = err || err.error || err.error.Error;
-      this.clickMessage = 'Tenant ' + tenant.name + ' has NOT been deleted. Error: ' + errMsg;
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }      this.clickMessage = 'Tenant ' + tenant.name + ' has NOT been deleted. Error: ' + errMsg;
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.clickMessage = 'Login expired. Redirect to login page...';

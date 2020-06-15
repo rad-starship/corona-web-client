@@ -59,7 +59,13 @@ export class RoleFormComponent implements OnInit {
       this.permissions = res;   
       console.log("Prmissions:", this.permissions);
     }, err => {
-      var errMsg = err || err.error || err.error.Error;
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }
       this.subitMsg = 'Error Loading Error: ' + errMsg;      
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
@@ -94,7 +100,13 @@ export class RoleFormComponent implements OnInit {
       },
       err => {
         console.log("Update Role Failed", err);
-        var errMsg = err || err.error || err.error.Error;
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
         this.subitMsg = 'Role ' + this.model.name + ' has NOT been updated. Error: : ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -126,7 +138,13 @@ export class RoleFormComponent implements OnInit {
       },
       err => {
         console.log("Create Role Failed", err);
-        var errMsg = err || err.error || err.error.Error;
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
         this.subitMsg = 'Role ' + this.model.name + ' has NOT been created. Error: ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {

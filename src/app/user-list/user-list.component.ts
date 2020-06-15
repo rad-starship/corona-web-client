@@ -41,7 +41,13 @@ export class UserListComponent implements OnInit {
         });        
       });
     }, err => {
-      console.log("Raz Error", err);
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }      this.clickMessage = 'Error Loading Error: ' + errMsg;
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.clickMessage = 'Login expired. Redirect to login page...';
@@ -80,8 +86,13 @@ export class UserListComponent implements OnInit {
     },
     err => {
       console.log("Delete user Failed", err);
-      var errMsg = err || err.error || err.error.Error;
-      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + errMsg;
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }      this.clickMessage = 'User ' + user.userName + ' has NOT been deleted. Error: ' + errMsg;
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.clickMessage = 'Login expired. Redirect to login page...';

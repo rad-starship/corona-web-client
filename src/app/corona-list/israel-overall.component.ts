@@ -11,6 +11,7 @@ import { SeriersChildModel } from '../model/seriersChild';
   styleUrls: ['./../app.component.navbar.css'],
   providers: [NgxChartsModule]
 })
+
 export class IsraelOverallComponent implements OnInit {
  
   israelData: any;

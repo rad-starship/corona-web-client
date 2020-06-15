@@ -9,6 +9,7 @@ export interface SingleValue {
   value: number;
 }
 
+//https://govextra.gov.il/ministry-of-health/corona/corona-virus/
 @Injectable()
 export class CoronaService {
 
@@ -1366,12 +1367,57 @@ export class CoronaService {
 		},
 		{
 			"date": "3/6/2020",
-			"overallTests": "606530",
+			"overallTests": "607162",
 			"critical": "28",
 			"hospitalized": "114",
 			"respiration": "25",
-			"verified": "17421",
+			"verified": "17396",
 			"deaths": "291"
-		}
+		},
+		{
+			"date": "4/6/2020",
+			"overallTests": "621851",
+			"critical": "30",
+			"hospitalized": "122",
+			"respiration": "23",
+			"verified": "17535",
+			"deaths": "291"
+		},
+		{
+			"date": "5/6/2020",
+			"overallTests": "638184",
+			"critical": "29",
+			"hospitalized": "116",
+			"respiration": "23",
+			"verified": "17659",
+			"deaths": "292"
+		},
+		{
+			"date": "6/6/2020",
+			"overallTests": "649718",
+			"critical": "29",
+			"hospitalized": "111",
+			"respiration": "21",
+			"verified": "17737",
+			"deaths": "296"
+		},
+		{
+			"date": "7/6/2020",
+			"overallTests": "664815",
+			"critical": "29",
+			"hospitalized": "120",
+			"respiration": "23",
+			"verified": "17877",
+			"deaths": "298"
+		},
+		{
+			"date": "8/6/2020",
+			"overallTests": "679255",
+			"critical": "30",
+			"hospitalized": "130",
+			"respiration": "23",
+			"verified": "18055",
+			"deaths": "298"
+		}	
      ]
     }

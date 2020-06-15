@@ -26,17 +26,20 @@ export class TenantFormComponent implements OnInit {
   heroForm: FormGroup;
 
   isEditMode: boolean;  
-  
+  continents: string[];
+
   constructor(private router: Router,
               private formBuilder: FormBuilder, 
               private userService: UserService,
               private roleService: RoleService,
               private tenantService: TenantService) 
   {
+    this.continents = ["Asia", "America", "Europe"]
+
     if (tenantService.tenantToUpdate === null || 
         tenantService.tenantToUpdate === undefined)
     {
-      this.model = new Tenant("", "");
+      this.model = new Tenant("", "", []);
       this.isEditMode = false;
     }
     else
@@ -71,7 +74,13 @@ export class TenantFormComponent implements OnInit {
       },
       err => {
         console.log("Update Tenant Failed", err);
-        var errMsg = err || err.error || err.error.Error;
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
         this.subitMsg = 'Tenant ' + this.model.name + ' has NOT been updated. Error: : ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -103,7 +112,13 @@ export class TenantFormComponent implements OnInit {
       },
       err => {
         console.log("Create Tenant Failed", err);
-        var errMsg = err || err.error || err.error.Error
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
         this.subitMsg = 'Tenant ' + this.model.name + ' has NOT been created. Error: ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {

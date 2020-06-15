@@ -53,6 +53,40 @@ export class UserFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.roleService.findAll().subscribe(res1 => {
+      this.roles = res1;
+
+      this.tenantsService.findAll().subscribe(res2 => {
+        this.tenants = res2;
+
+        this.userService.findAll().subscribe(res3 => {
+          this.users = res3;
+          for (var i = 0; i < this.users.length; i++) {
+            this.users[i].roleName   = this.roleService.getRoleName(this.roles, this.users[i].roleID);
+            this.users[i].tenantName = this.tenantsService.getTenantsName(this.tenants, this.users[i].tenantsID);
+          }   
+        });        
+      });
+    }, err => {
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }      this.subitMsg = 'Error Loading Error: ' + errMsg;
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.subitMsg = 'Login expired. Redirect to login page...';
+          // redirect to the login route
+          setTimeout(() => 
+          {
+            this.router.navigate(['/']);
+          },
+          2000);   
+        }
+      }      
+    });    
   }
  
   onSubmit() 
@@ -74,7 +108,14 @@ export class UserFormComponent implements OnInit {
       },
       err => {
         console.log("Update user  Failed", err);
-        this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: : ' + err.error.Error;
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
+        this.subitMsg = 'User ' + this.model.userName + ' has NOT been updated. Error: : ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             this.subitMsg = 'Login expired. Redirect to login page...';
@@ -104,8 +145,14 @@ export class UserFormComponent implements OnInit {
         2000);      
       },
       err => {
-        console.log("Create user  Failed", err);
-        var errMsg = err || err.error || err.error.Error;
+        console.log("Create user Failed", err);
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
         this.subitMsg = 'User ' + this.model.userName + ' has NOT been created. Error: ' + errMsg;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
