@@ -52,7 +52,7 @@ export class TenantListComponent implements OnInit {
 
   clickMessage = ''; 
 
-  onTenantKeycloak(tenant: Tenant) {
+  onTenantKeycloak() {
     window.open('http://localhost:8080/auth/', "_blank");
   }
 

@@ -35,7 +35,7 @@ export class CoronaService {
   public getCountriesLatestSampleData()
   {
     var r = [
-     { "country": "USA",   "confirmed": 1212444, "recovered": 331, "critical": 7, "deaths": 72, "lastChange": "2020-05-02T11:27:27+02:00", "lastUpdate": "2020-05-03T09:30:03+02:00"},
+     { "country": "USA",   		 "confirmed": 1212444, "recovered": 331, "critical": 7, "deaths": 72, "lastChange": "2020-05-02T11:27:27+02:00", "lastUpdate": "2020-05-03T09:30:03+02:00"},
      { "country": "Italy",       "confirmed": 237666, "recovered": 331, "critical": 7, "deaths": 72, "lastChange": "2020-05-02T11:27:27+02:00", "lastUpdate": "2020-05-03T09:30:03+02:00"},
      { "country": "Sapin",       "confirmed": 328662, "recovered": 331, "critical": 7, "deaths": 72, "lastChange": "2020-05-02T11:27:27+02:00", "lastUpdate": "2020-05-03T09:30:03+02:00"},
      { "country": "Chaina",      "confirmed": 81097, "recovered": 331, "critical": 7, "deaths": 72, "lastChange": "2020-05-02T11:27:27+02:00", "lastUpdate": "2020-05-03T09:30:03+02:00"},
@@ -64,12 +64,12 @@ export class CoronaService {
   public getTotalLatestSampleData() {
     var r = 
       {
-        "confirmed": 3494535,
-        "recovered": 1136205,
-        "critical": 50863,
-        "deaths": 244987,
-        "lastChange": "2020-05-03T09:23:51+02:00",
-        "lastUpdate": "2020-05-03T09:30:03+02:00"
+        "confirmed": 8181993,
+        "recovered": 4256900,
+        "critical": 54557,
+        "deaths": 441477,
+        "lastChange": "2020-06-15T09:23:51+02:00",
+        "lastUpdate": "2020-06-15T09:30:03+02:00"
       };
 
       var single = [

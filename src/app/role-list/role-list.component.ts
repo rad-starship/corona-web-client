@@ -16,7 +16,8 @@ import { Router} from '@angular/router';
 export class RoleListComponent implements OnInit {
  
   roles: Role[];
- 
+  clickMessage = ''; 
+
   constructor(private router: Router,
               private userService: UserService, 
               private tenantsService: TenantService, 
@@ -49,8 +50,6 @@ export class RoleListComponent implements OnInit {
       }      
     });
   }
-
-  clickMessage = ''; 
 
   onRoleAdd(role: Role) {
     this.router.navigate(['/addrole']);

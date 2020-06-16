@@ -38,6 +38,9 @@ import { CoronaService } from './service/corona.service';
 import { LoginService } from './service/auth/login.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { EventsComponent } from './events/events.component';
+import { SessionsComponent } from './sessions/sessions.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { LogoutComponent } from './logout/logout.component';
     IsraelOverallComponent,
     RoleFormComponent,
     LoginComponent,
-    LogoutComponent ],
+    LogoutComponent,
+    EventsComponent,
+    SessionsComponent,
+    SettingsComponent ],
   imports: [
     CommonModule,
     BrowserModule,

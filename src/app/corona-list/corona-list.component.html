@@ -187,8 +187,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let corona of coronas">
-              <td>{{ corona.id }}</td>
+            <tr *ngFor="let corona of coronas let i = index">
+              <td>{{ i+1 }}</td>
               <td>{{ corona.continent }}</td>
               <td>{{ corona.country }}</td>
               <td>{{ corona.population }}</td>
