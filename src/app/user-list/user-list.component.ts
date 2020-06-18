@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse} from '@angular/common/http';
+import { Router} from '@angular/router';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 import { Tenant } from '../model/tenant';
 import { TenantService } from '../service/tenant.service';
 import { Role } from '../model/role';
 import { RoleService } from '../service/role.service';
-import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-list',

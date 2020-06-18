@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CustomMaterialModule } from './core/material.module';
+import { MatDialogModule} from "@angular/material";
 
 import { CommonModule } from '@angular/common';
 
@@ -39,8 +40,11 @@ import { LoginService } from './service/auth/login.service';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { EventsComponent } from './events/events.component';
+import { EventsService } from './service/events.service';
 import { SessionsComponent } from './sessions/sessions.component';
+import { SessionService } from './service/session.service';
 import { SettingsComponent } from './settings/settings.component';
+import { SettingsService } from './service/settings.service';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,7 @@ import { SettingsComponent } from './settings/settings.component';
     SessionsComponent,
     SettingsComponent ],
   imports: [
+    MatDialogModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
@@ -77,6 +82,9 @@ import { SettingsComponent } from './settings/settings.component';
     RoleService, 
     TenantService, 
     CoronaService,
+    EventsService,
+    SessionService,
+    SettingsService,
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,

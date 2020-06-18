@@ -64,9 +64,108 @@
       </nav>
   
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <h2>Administration Settings</h2>
+        <h1>Administration Settings</h1>
         <BR>    
-        {{clickMessage}}
+
+            <form #heroForm="ngForm" (ngSubmit)="onSubmit()">
+                <H2>Authentication</H2>
+                <HR>
+                <H3>Token</H3>
+                    <div class="form-group">
+                    <label for="ssoSessionIdle">SSO Session Idle</label>
+                    <input type="number" class="form-control" id="ssoSessionIdle" aria-describedby="ssoSessionIdleHelp" placeholder="30" [(ngModel)]="model.authentication.token.ssoSessionIdle" name="ssoSessionIdle">
+                    <small id="ssoSessionIdleHelp" class="form-text text-muted">If the user is not active for longer than this timeout, the user session will be invalidate</small>
+                    </div>   
+                    <div class="form-group">
+                        <label for="ssoSessionMax">SSO Session Max</label>
+                        <input type="number" class="form-control" id="ssoSessionMax" aria-describedby="ssoSessionMaxHelp" placeholder="600" [(ngModel)]="model.authentication.token.ssoSessionMax" name="ssoSessionMax">
+                        <small id="ssoSessionMaxHelp" class="form-text text-muted">Maximum time before a user session is expired and invalidated. It controls the maximum time a user session can remain active, regardless of activity.</small>
+                    </div>   
+                    <div class="form-group">
+                        <label for="offlineSessionIdle">Offline Session Idle</label>
+                        <input type="number" class="form-control" id="offlineSessionIdle" aria-describedby="offlineSessionIdleHelp" placeholder="1500" [(ngModel)]="model.authentication.token.offlineSessionIdle" name="offlineSessionIdle">
+                        <small id="offlineSessionIdleHelp" class="form-text text-muted">For offline access, this is the time the session is allowed to remain idle before the offline token is revoked. There is a small window of time that is always added to the idle timeout before the session is actually invalidated.</small>
+                    </div>   
+                    <div class="form-group">
+                        <label for="accessTokenLifespan">Access Token Lifespan</label>
+                        <input type="number" class="form-control" id="accessTokenLifespan" aria-describedby="accessTokenLifespanHelp" placeholder="20" [(ngModel)]="model.authentication.token.accessTokenLifespan" name="accessTokenLifespan">
+                        <small id="accessTokenLifespanHelp" class="form-text text-muted">Max time before an access token is expired</small>
+                    </div>                  
+
+                <BR><H3>Password Policy</H3>
+                    <div class="form-group">
+                        <label for="expirePassword">expirePassword</label>
+                        <input type="number" class="form-control" id="expirePassword" aria-describedby="expirePasswordHelp" placeholder="365" [(ngModel)]="model.authentication.passwordPolicy.expirePassword" name="expirePassword">
+                        <small id="expirePasswordHelp" class="form-text text-muted">info</small>
+                    </div>    
+                    <div class="form-group">
+                        <label for="minimumLength">Access Token Lifespan</label>
+                        <input type="number" class="form-control" id="minimumLength" aria-describedby="minimumLengthHelp" placeholder="8" [(ngModel)]="model.authentication.passwordPolicy.minimumLength" name="minimumLength">
+                        <small id="minimumLengthHelp" class="form-text text-muted">info</small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="notRecentlyUsed">Not Recently Used</label>
+                        <input type="number" class="form-control" id="notRecentlyUsed" aria-describedby="notRecentlyUsedHelp" placeholder="3" [(ngModel)]="model.authentication.passwordPolicy.notRecentlyUsed" name="notRecentlyUsed">
+                        <small id="notRecentlyUsedHelp" class="form-text text-muted">info</small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="digits">Digits</label>
+                        <input type="number" class="form-control" id="digits" aria-describedby="digitsHelp" placeholder="1" [(ngModel)]="model.authentication.passwordPolicy.digits" name="digits">
+                        <small id="digitsHelp" class="form-text text-muted">info</small>
+                    </div>  
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="notUsername" aria-describedby="notUsernameHelp" placeholder="true" [(ngModel)]="model.authentication.passwordPolicy.notUsername" name="notUsername">
+                        <label class="form-check-label" for="notUsername">Not User Name</label>
+                        <small id="notUsernameHelp" class="form-text text-muted">info</small>
+                    </div>           
+                                    
+                <BR><H3>OTP Policy</H3>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="otpEnabled" aria-describedby="otpEnabledHelp" placeholder="365" [(ngModel)]="model.authentication.otpPolicy.enabled" name="otpEnabled">
+                        <label class="form-check-label" for="otpEnabled">OTP Enabled</label>
+                        <small id="otpEnabledHelp" class="form-text text-muted">info</small>
+                    </div>    
+                    <div class="form-group">
+                        <label for="optType">OTP Type</label>
+                        <input type="text" class="form-control" id="optType" aria-describedby="optTypeHelp" placeholder="8" [(ngModel)]="model.authentication.otpPolicy.optType" name="optType">
+                        <small id="optTypeHelp" class="form-text text-muted">info</small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="numberOfDigits">Number Of Digits</label>
+                        <input type="number" class="form-control" id="notRecentlyUsed" aria-describedby="numberOfDigitsHelp" placeholder="8" [(ngModel)]="model.authentication.otpPolicy.numberOfDigits" name="numberOfDigits">
+                        <small id="numberOfDigitsHelp" class="form-text text-muted">info</small>
+                    </div>  
+                    <div class="form-group">
+                        <label for="optTokenPeriod">OTP Token Period</label>
+                        <input type="number" class="form-control" id="optTokenPeriod" aria-describedby="optTokenPeriodHelp" placeholder="30" [(ngModel)]="model.authentication.otpPolicy.optTokenPeriod" name="optTokenPeriod">
+                        <small id="optTokenPeriodHelp" class="form-text text-muted">info</small>
+                    </div>  
+
+                <H2>Authentication</H2>
+                <HR>
+            
+                <H2>Events</H2>                
+                <HR>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="eventsEnabled" aria-describedby="eventsEnabledHelp" placeholder="true" [(ngModel)]="model.events" name="eventsEnabled">
+                        <label class="form-check-label" for="eventsEnabled">Events Enabled</label>
+                        <small id="eventsEnabledHelp" class="form-text text-muted">info</small>
+                    </div> 
+
+                <H2>General</H2>                
+                    <HR>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="isOnline" aria-describedby="isOnlineHelp" placeholder="true" [(ngModel)]="model.isOnline" name="isOnline">
+                            <label class="form-check-label" for="isOnline">is Online Data</label>
+                            <small id="isOnlineHelp" class="form-text text-muted">info</small>
+                        </div> 
+
+                <button type="submit" [disabled]="heroForm.pristine || heroForm.invalid" class="btn btn-primary">Apply</button>
+              </form>
+              {{clickMessage}}
+              <BR><BR>  
+            
+              <!-- {{diagnostic}} -->
       </main>
     </div>
   </div>

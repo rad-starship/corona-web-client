@@ -1,3 +1,4 @@
+import { HttpErrorResponse} from '@angular/common/http';
 import { LoginResponse } from './../model/loginResponse';
 import { AuthService } from './../service/auth/auth.service';
 import { LoginRequest } from './../model/loginRequest';
@@ -50,6 +51,13 @@ export class LoginComponent implements OnInit {
     err => {
       console.log("Login Failed", err);
       this.clickMessage = 'Login Failed. Error: ' + err.error.Error;
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.clickMessage = 'Login expired. Redirect to login page...';
+        }
+        this.clickMessage = 'Login Failed. Error: ' + err.message;
+
+      }         
     } 
    );      
   }

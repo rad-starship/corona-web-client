@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../model/event';
+import { EventsService } from '../service/events.service';
 
 @Component({
   selector: 'app-events',
@@ -11,7 +12,7 @@ export class EventsComponent implements OnInit {
   events: Event[];
   clickMessage = ''; 
 
-  constructor() { }
+  constructor(eventsService: EventsService) { }
 
   ngOnInit(): void {
   }

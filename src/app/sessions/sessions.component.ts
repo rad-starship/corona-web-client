@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Session } from '../model/session';
+import { SessionService } from '../service/session.service';
 
 @Component({
   selector: 'app-sessions',
@@ -11,7 +12,7 @@ export class SessionsComponent implements OnInit {
   sessions: Session[];
   clickMessage = ''; 
 
-  constructor() { }
+  constructor(sessionService: SessionService) { }
 
   ngOnInit(): void {
   }
