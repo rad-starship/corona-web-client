@@ -9,37 +9,37 @@
           <li class="nav-item">
             <a class="nav-link active" href="/corona">
               <span data-feather="home"></span>
-              Overall <span class="sr-only">(current)</span>
+              Overall <span ng-show="country=Italy" class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/corona">
+            <a class="nav-link" href="/corona?country=USA">
               <span data-feather="file"></span>
               USA
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/corona">
+            <a class="nav-link" href="/corona?country=Italy">
               <span data-feather="shopping-cart"></span>
-              Italy
+              Italy<span ng-show="country=Italy" class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/corona">
+            <a class="nav-link" href="/corona?country=Spain">
               <span data-feather="users"></span>
-              Spain
+              Spain<span ng-show="country=Spain" class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/corona">
+            <a class="nav-link" href="/corona?country=Brazil">
               <span data-feather="bar-chart-2"></span>
-              Brazil
+              Brazil<span ng-show="country=Brazil" class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/corona">
+            <a class="nav-link" href="/corona?country=France">
               <span data-feather="layers"></span>
-              France
+              France<span ng-show="country=France" class="sr-only">(current)</span>
             </a>
           </li>
         </ul>
@@ -78,18 +78,22 @@
   </div>
 
 <BR><BR>
-<H1>Currently Total</H1>
+
+{{clickMessage}}
+
+<div ng-show="true">
+  <h2>World Currently Overall Status at {{totalsLatestDate}}</h2>
+<ngx-charts-number-card
+[view]="[600, 400]" [scheme]="colorScheme" [results]="totalsLatest" [cardColor]="cardColor" (select)="onSelect($event)"> </ngx-charts-number-card>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+</div>
+
+<H2>Currently Top Confirmed Countries</H2>
 <ngx-charts-advanced-pie-chart
-  [view]="[1200, 400]"
-  [scheme]="colorScheme"
-  [results]="countriesLatest"
-  [gradient]="gradient"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
+[view]="[1200, 400]" [scheme]="colorScheme" [results]="topCountriesLatest" [gradient]="gradient" (select)="onSelect($event)" (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
 </ngx-charts-advanced-pie-chart>
 
+<!-- 
 <H1>AAA</H1>
 <ngx-charts-gauge
   [view]="[400, 300]"
@@ -102,21 +106,19 @@
   (deactivate)="onDeactivate($event)"
   >
 </ngx-charts-gauge>
-
-
-<H1>C</H1>
+-->
+<div ng-show="true">
+  <H2>Top Confirmed Countries</H2>
 <ngx-charts-pie-grid
-  [view]="[400, 300]"
+  [view]="[1000, 200]"
   [scheme]="colorScheme"
   [results]="single"
   (select)="onSelect($event)">
 </ngx-charts-pie-grid>
 
-<H1>D</H1>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<H2>Top Deaths Countries</H2>
 <div style="text-align:center">
-  <h3 class="text-secondary">
-    CoronaView Data
-  </h3>
   <div class="row ml-5">
     <div class="col">
         <div class="row">
@@ -128,7 +130,7 @@
               <ngx-charts-bar-vertical
               [view]="view"
               [scheme]="colorScheme"
-              [results]="single"
+              [results]="numberOfWorldsDeaths"
               [gradient]="gradient"
               [xAxis]="showXAxis"
               [yAxis]="showYAxis"
@@ -142,10 +144,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+    <BR><BR><BR>
     <div class="row ml-5">
-      <h4>
-        Stacked Vertical Bar Chart
-      </h4>
+        <H2>Top Confirmed Countries</H2>
     </div>
     <div class="form-group row ml-5">
       <ngx-charts-bar-vertical-stacked
@@ -163,9 +166,7 @@
       (select)="onSelect($event)">
       </ngx-charts-bar-vertical-stacked>
     </div>
-
 </div>
-
 <BR>
 
 <div>

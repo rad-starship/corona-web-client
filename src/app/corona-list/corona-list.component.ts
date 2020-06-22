@@ -1,3 +1,5 @@
+import { HttpErrorResponse} from '@angular/common/http';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import { AppComponent } from './../app.component';
 import { Component, OnInit } from '@angular/core';
 import { CoronaVirus } from '../model/coronaVirus';
@@ -14,8 +16,17 @@ import { SeriersChildModel } from '../model/seriersChild';
   providers: [NgxChartsModule]
 })
 export class CoronaListComponent implements OnInit {
- 
+  clickMessage = ''; 
   coronas: CoronaVirus[];
+
+  //General
+  cardColor: string = '#232837';
+
+  //OverAll Today
+  totalsLatestDate: string;
+  totalsLatest: any[];
+
+  //
 
   ngxData: ChartDataModel = {
         data: []
@@ -42,27 +53,168 @@ export class CoronaListComponent implements OnInit {
   };
 
   single = new Array();
+  numberOfWorldsDeaths = new Array();
+
   multi: any;
  
   totalLatest     = new Array();
-  countriesLatest = new Array();
+  topCountriesLatest = new Array();
 
-  constructor(private coronaService: CoronaService) {
+  country: string;
+  countryMode: boolean;
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private coronaService: CoronaService) {
+    this.country = "";
   }
  
   ngOnInit() {
-    console.log(new Date() + ": " + JSON.stringify("Init Coronas"));
-       
-    this.totalLatest     = this.coronaService.getTotalLatestSampleData();
-    this.countriesLatest = this.coronaService.getCountriesLatestSampleData();
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.country = params['country'];
 
-    this.multi  = this.coronaService.getMultiSampleData();
-    this.single = this.coronaService.getSingleSampleData();
- 
+      console.log(new Date() + ": " + JSON.stringify("Init Coronas"), this.country);
+
+      if (this.country == "" || this.country == undefined) {
+        this.country = "";
+        this.countryMode = false;
+        console.log("Country: " + this.country, "Mode: " + this.countryMode);
+        this.displayAll();
+      }
+      else {
+        this.countryMode = true;
+        console.log("Country: " + this.country, "Mode: " + this.countryMode);
+        this.displayCountry(this.country);
+      }
+  });
+  }
+
+  private displayCountry(country: string) {
+    this.getCountryLatest(country);
+  }
+
+  private displayAll() {
+    this.getTotalsLatest();
+    this.getCountriesLatest("");
+  }
+
+  private getTotalsLatest() {
+    this.coronaService.getTotalsLatest().subscribe((data: CoronaVirus) => {
+      this.totalsLatest = [
+        { "name": "Confirmed",  "value": this.formatNumber(data.confirmed) },
+        { "name": "Verified",   "value": this.formatNumber(data.confirmed-data.recovered) },
+        { "name": "Recovered",  "value": this.formatNumber(data.recovered) },
+        { "name": "Critical",   "value": this.formatNumber(data.critical) },
+        { "name": "Deaths",     "value": this.formatNumber(data.deaths) }
+      ];     
+      this.totalsLatestDate = this.convert2Date(data.lastUpdate);
+
+      console.log("totalsLatest", new Date() + ": " + JSON.stringify(data));
+    }, err => {
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }
+      this.clickMessage = 'Error Loading Error: ' + errMsg;      
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.clickMessage = 'Login expired. Redirect to login page...';
+          // redirect to the login route
+          setTimeout(() => 
+          {
+            this.router.navigate(['/']);
+          },
+          2000);   
+        }
+      }      
+    });
+  }
+
+  private getCountryLatest(country: string) {
+    this.getCountriesLatest(country);
+  }
+
+  private getCountriesLatest(country: string) {
     //Get Corona Data
-    this.coronaService.getCountriesLatest().subscribe(data => {
-      this.coronas = data;
+    this.coronaService.getCountriesLatest().subscribe((data: CoronaVirus[]) => {
+
+      if (country == "") {
+        this.coronas = data;
+      }
+      else {
+        var newData:CoronaVirus[];
+        newData = [];
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].country == country)
+            newData.push(data[i]);
+        }
+        this.coronas = newData;
+      }
+
       this.handleCountriesLatest(this.coronas);
+
+      var arr: CoronaVirus[];
+      arr = Object.assign([], this.coronas);
+
+      arr.sort(function (a, b) {
+        return b.confirmed - a.confirmed;
+      });
+
+       this.topCountriesLatest = [];
+       this.single = [];
+       this.numberOfWorldsDeaths = [];
+       this.multi = [];
+       for (var i = 0; i < arr.length; i++) {
+       {
+         if (country != "" && arr[i].country != country)
+          continue;
+
+          this.topCountriesLatest.push({ "name": arr[i].country, "value": arr[i].confirmed });
+
+          if (arr[i].deaths >  2000)
+             this.numberOfWorldsDeaths.push({ "name": arr[i].country, "value": arr[i].deaths });
+
+          if (arr[i].country == "Brazil" || 
+              arr[i].country == "India" || 
+              arr[i].country == "Spain" || 
+              arr[i].country == "Peru" || 
+              arr[i].country == "Brazil" || 
+              arr[i].country == "Chile" || 
+              arr[i].country == "Russia") {
+            this.single.push({ "name": arr[i].country, "value": arr[i].confirmed });
+          }
+
+          if (arr[i].confirmed > 100000)
+          {
+            var series = [];
+            series.push({"name": "Confirmed", "value": arr[i].confirmed});
+            series.push({"name": "Critical", "value": arr[i].critical});
+            series.push({"name": "Deaths", "value": arr[i].deaths});
+            this.multi.push({ "name": arr[i].country, "series": series});
+          }
+       }
+      }      
+    }, err => {
+      var errMsg = err;
+      if (err.error != null)
+      {
+        errMsg = err.error;
+        if (err.error.Error != null)
+          errMsg = err.error.Error; 
+      }
+      this.clickMessage = 'Error Loading Error: ' + errMsg;      
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          this.clickMessage = 'Login expired. Redirect to login page...';
+          // redirect to the login route
+          setTimeout(() => 
+          {
+            this.router.navigate(['/']);
+          },
+          2000);   
+        }
+      }      
     });
   }
 
@@ -74,9 +226,9 @@ export class CoronaListComponent implements OnInit {
 
   adjustDisplay(coronas: CoronaVirus[]) {
     for (var i = 0; i < this.coronas.length; i++) {
-      this.coronas[i].lastChangeDisplay = new Date(this.coronas[i].lastChange).toLocaleString();
-      this.coronas[i].lastUpdateDisplay = new Date(this.coronas[i].lastUpdate).toDateString();
-      this.coronas[i].population = this.formatNumber(this.coronas[i].population);
+      this.coronas[i].lastChangeDisplay = this.convert2Date(this.coronas[i].lastChange);
+      this.coronas[i].lastUpdateDisplay = this.convert2Date(this.coronas[i].lastUpdate);
+      this.coronas[i].population        = this.formatNumber(this.coronas[i].population);
     }    
   }
 
@@ -90,7 +242,7 @@ export class CoronaListComponent implements OnInit {
             this.coronas[i].country == "France" ||  
             this.coronas[i].country == "Germany" ||  
             this.coronas[i].country == "India" ||  
-            this.coronas[i].country == "USA" ||  
+           this.coronas[i].country == "USA" ||  
             this.coronas[i].country == "Israel" ||  
             this.coronas[i].country == "China")
         {
@@ -104,6 +256,11 @@ export class CoronaListComponent implements OnInit {
     }
 
     this.ngxData = new ChartDataModel(serielModelList);
+  }
+
+  convert2Date(date:number) {
+    return new Date(date).toDateString();
+    //    return new Date(date).toLocaleString();
   }
 
   formatNumber(num) {

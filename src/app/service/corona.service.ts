@@ -27,10 +27,42 @@ export class CoronaService {
     this.totalsDailyUrl     = this.baseUrl + 'totalsDaily';
   }
 
+  /*
+    "lastChange": 1592741307000,
+    "lastUpdate": 1592741703000,
+    "confirmed": 8988578,
+    "recovered": 4768560,
+    "active": 0,
+    "critical": 54572,
+    "deaths": 468073
+  */
+  public getTotalsLatest(): Observable<CoronaVirus> {
+    var result = this.http.get<CoronaVirus>(this.totalsLatestUrl);
+    return result;
+  }
+
+  /**
+	 "confirmed": 2472259,
+	"recovered": 560866,
+	"deaths": 169986,
+	"active": 1741407,
+	"date": "2020-04-20"
+   */
+  public getTotalsDaily(date) : Observable<CoronaVirus> {
+    return this.http.get<CoronaVirus>(this.totalsDailyUrl);
+  }
+
   public getCountriesLatest(): Observable<CoronaVirus[]> {
     var result = this.http.get<CoronaVirus[]>(this.countriesLatestUrl);
     return result;
   }
+
+  public getCountryDaily(date, countryName) : Observable<CoronaVirus[]> {
+    var result = this.http.get<CoronaVirus[]>(this.countryDailyUrl);
+    return result;
+  }
+
+  /** "message": "You are not allowed to access this request with your subscription"*/
 
   public getCountriesLatestSampleData()
   {
@@ -49,16 +81,6 @@ export class CoronaService {
       single.push({ "name": r[i].country, "value": r[i].confirmed });
     }
     return single; 
-  }
-
-  public getCountryDaily(date, countryName) : Observable<CoronaVirus[]> {
-    var result = this.http.get<CoronaVirus[]>(this.countryDailyUrl);
-    return result;
-  }
-
-  public getTotalsLatest(): Observable<CoronaVirus[]> {
-    var result = this.http.get<CoronaVirus[]>(this.totalsLatestUrl);
-    return result;
   }
 
   public getTotalLatestSampleData() {
@@ -81,18 +103,7 @@ export class CoronaService {
       return single;
   }
 
-  /**
-  {
-      "confirmed": 2472259,
-      "recovered": 560866,
-      "deaths": 169986,
-      "active": 1741407,
-      "date": "2020-04-20"
-    }   
-   */
-  public getTotalsDaily(date) {
-    return this.http.get<CoronaVirus[]>(this.totalsDailyUrl);
-  }
+
 
   public getSingleSampleData()
   {
@@ -1418,6 +1429,60 @@ export class CoronaService {
 			"respiration": "23",
 			"verified": "18055",
 			"deaths": "298"
-		}	
+		},
+		{
+			"date": "9/6/2020",
+			"overallTests": "695107",
+			"critical": "31",
+			"hospitalized": "130",
+			"respiration": "24",
+			"verified": "18227",
+			"deaths": "299"
+		},
+		{
+			"date": "10/6/2020",
+			"overallTests": "713588",
+			"critical": "32",
+			"hospitalized": "132",
+			"respiration": "23",
+			"verified": "18464",
+			"deaths": "300"
+		},
+		{
+			"date": "11/6/2020",
+			"overallTests": "729322",
+			"critical": "35",
+			"hospitalized": "138",
+			"respiration": "24",
+			"verified": "18655",
+			"deaths": "300"
+		},
+		{
+			"date": "12/6/2020",
+			"overallTests": "742326",
+			"critical": "34",
+			"hospitalized": "138",
+			"respiration": "25",
+			"verified": "18838",
+			"deaths": "300"
+		},
+		{
+			"date": "13/6/2020",
+			"overallTests": "749305",
+			"critical": "35",
+			"hospitalized": "138",
+			"respiration": "26",
+			"verified": "18987",
+			"deaths": "301"
+		},
+		{
+			"date": "14/6/2020",
+			"overallTests": "758142",
+			"critical": "32",
+			"hospitalized": "146",
+			"respiration": "23",
+			"verified": "19123",
+			"deaths": "303"
+		}
      ]
-    }
+	}

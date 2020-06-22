@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Inject, Injectable, OnInit } from '@angular/core';
 import { AppModule } from './app.module';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 // import * as Keycloak from 'keycloak-js'
 
@@ -53,6 +55,23 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 })
 export class AppComponent {
 
-  constructor() {
+  private STORAGE_KEY = 'corona_user_name';
+
+  public userName: string;
+  constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
+    this.userName = this.storage.get(this.STORAGE_KEY)[0].userName;
+  }
+
+  public setUserName(name: string) {
+    this.userName = name;
+
+    var currentAppData = this.storage.get(this.STORAGE_KEY) || [];
+    currentAppData = [];
+    // push new task to array
+    currentAppData.push({
+        userName: this.userName 
+    });
+    // insert updated array to local storage
+    this.storage.set(this.STORAGE_KEY, currentAppData);
   }
 }

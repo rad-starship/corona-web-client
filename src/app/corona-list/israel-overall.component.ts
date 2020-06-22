@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CoronaService } from '../service/corona.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -21,6 +22,7 @@ export class IsraelOverallComponent implements OnInit {
   };
 
   multi: any[];
+  verified: any[];
   overall: any[];
   overallGauge: any[];
   overallDate: string;
@@ -98,13 +100,16 @@ export class IsraelOverallComponent implements OnInit {
     ];    
 
     //serielModelList.push(new SerieModel("Overall Tests", overallSeriesList));   
-    //serielModelList.push(new SerieModel("Verified", verifiedSeriesList));   
     serielModelList.push(new SerieModel("Hospitalized", hospitalizedSeriesList));   
     serielModelList.push(new SerieModel("Critical", criticalSeriesList));   
     serielModelList.push(new SerieModel("Respiration", respirationSeriesList));   
     serielModelList.push(new SerieModel("Deaths", deathsSeriesList));   
 
     this.ngxData = new ChartDataModel(serielModelList);
+
+    var serielModelList2 = [];
+    serielModelList2.push(new SerieModel("Verified", verifiedSeriesList));   
+    this.verified = new ChartDataModel(serielModelList2).data;
   }
 
   formatNumber(num) {

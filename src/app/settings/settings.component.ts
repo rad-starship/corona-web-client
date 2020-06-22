@@ -34,33 +34,33 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.settingsService.get().subscribe(
-    //   (res:Settings) => { 
-    //     this.model = res;
-    //   },
-    //   err => {
-    //     console.log("Get Settings Failed", err);
-    //     var errMsg = err;
-    //     if (err.error != null)
-    //     {
-    //       errMsg = err.error;
-    //       if (err.error.Error != null)
-    //         errMsg = err.error.Error; 
-    //     }
-    //     this.clickMessage = 'Get Settings Failed. Error: : ' + err.message;
-    //     if (err instanceof HttpErrorResponse) {
-    //       if (err.status === 401) {
-    //         this.clickMessage = 'Login expired. Redirect to login page...';
-    //         // redirect to the login route
-    //         setTimeout(() => 
-    //         {
-    //           this.router.navigate(['/']);
-    //         },
-    //         2000);   
-    //       }
-    //     }          
-    //   } 
-    // ); 
+    this.settingsService.get().subscribe(
+      (res:Settings) => { 
+        this.model = res;
+      },
+      err => {
+        console.log("Get Settings Failed", err);
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
+        this.clickMessage = 'Get Settings Failed. Error: : ' + err.message;
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.clickMessage = 'Login expired. Redirect to login page...';
+            // redirect to the login route
+            setTimeout(() => 
+            {
+              this.router.navigate(['/']);
+            },
+            2000);   
+          }
+        }          
+      } 
+    ); 
   }
 
   
