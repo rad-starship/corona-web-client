@@ -71,16 +71,23 @@
             <thead>
               <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col"></th>
+                <th scope="col">User Name</th>
+                <th scope="col">User ID</th>
+                <th scope="col">IP Address</th>        
+                <th scope="col">Start</th>        
+                <th scope="col">Last Access</th>        
                 <th scope="col"></th>        
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let session of sessions" (click)="onRowSelected(session);">
                 <td>{{ session.id }}</td>
-                <td>{{ session.name }}</td>
-                <td> <button type="button" class="btn btn-danger" (click)="onDelete(session)">Logout</button></td>              
+                <td>{{ session.username }}</td>
+                <td>{{ session.userId }}</td>
+                <td>{{ session.ipAddress }}</td>
+                <td>{{ session.startDisplay }}</td>
+                <td>{{ session.lastAccessDisplay }}</td>
+                <td> <button type="button" class="btn btn-danger" (click)="onDelete(session)">Logout</button></td>           
               </tr>            
             </tbody>
           </table>
@@ -88,5 +95,4 @@
         </div>
       </main>
     </div>
-  </div>
-  
+  </div>  

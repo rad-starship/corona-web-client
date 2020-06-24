@@ -17,8 +17,8 @@ export class SettingsService {
     return this.http.get<Settings>(this.settingsUrl);
   }
 
-  public save(settings: Settings) {
-    console.log("Save Settings", settings);
+  public update(settings: Settings) {
+    console.log("Update Settings", settings);
     return this.http.post<Settings>(this.settingsUrl, settings);
   }
 

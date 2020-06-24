@@ -29,7 +29,6 @@ export class SettingsComponent implements OnInit {
                                                  true, 
                                                  true);
     this.form = this.formBuilder.group({}); 
-    console.log("raz", this.model);
   }
 
   ngOnInit(): void {
@@ -37,6 +36,7 @@ export class SettingsComponent implements OnInit {
     this.settingsService.get().subscribe(
       (res:Settings) => { 
         this.model = res;
+        console.log("Settings", this.model);
       },
       err => {
         console.log("Get Settings Failed", err);
@@ -63,12 +63,49 @@ export class SettingsComponent implements OnInit {
     ); 
   }
 
-  
   onTenantKeycloak() {
     window.open('http://localhost:8080/auth/', "_blank");
   }
 
   onSubmit() {
-    
+    console.log("Update Settings", this.model);
+
+      this.clickMessage = 'Settings under update';
+      this.settingsService.update(this.model).subscribe(res => { 
+        this.clickMessage = 'Settings has been updated';
+        console.log("Settings user OK", res);
+        setTimeout(() => 
+        {
+          this.ngOnInit();
+        },
+        2000);
+      },
+      err => {
+        console.log("Update Settings Failed", err);
+        var errMsg = err;
+        if (err.error != null)
+        {
+          errMsg = err.error;
+          if (err.error.Error != null)
+            errMsg = err.error.Error; 
+        }
+        this.clickMessage = 'Settings has NOT been updated. Error: : ' + errMsg;
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.clickMessage = 'Login expired. Redirect to login page...';
+            // redirect to the login route
+            setTimeout(() => 
+            {
+              this.router.navigate(['/']);
+            },
+            2000);   
+          }
+        }                
+      } 
+     ); 
+  }
+
+  get diagnostic() { 
+    return JSON.stringify(this.model); 
   }
 }
