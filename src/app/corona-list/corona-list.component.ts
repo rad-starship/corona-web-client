@@ -136,11 +136,13 @@ export class CoronaListComponent implements OnInit {
   }
 
   private getCountriesLatest(country: string) {
-    //Get Corona Data
-    this.coronaService.getCountriesLatest().subscribe((data: CoronaVirus[]) => {
+    //Get Corona 
+    this.clickMessage = 'Still Loading...';      
 
+    this.coronaService.getCountriesLatest().subscribe((data: CoronaVirus[]) => {
       if (country == "") {
         this.coronas = data;
+        //console.log("getCountriesLatest all", new Date() + ": " + JSON.stringify(data));
       }
       else {
         var newData:CoronaVirus[];
@@ -150,6 +152,7 @@ export class CoronaListComponent implements OnInit {
             newData.push(data[i]);
         }
         this.coronas = newData;
+        //console.log("getCountriesLatest ", country, new Date() + ": " + JSON.stringify(data));
       }
 
       this.handleCountriesLatest(this.coronas);
@@ -175,11 +178,13 @@ export class CoronaListComponent implements OnInit {
           if (arr[i].deaths >  2000)
              this.numberOfWorldsDeaths.push({ "name": arr[i].country, "value": arr[i].deaths });
 
-          if (arr[i].country == "Brazil" || 
-              arr[i].country == "India" || 
+          if (arr[i].country == "USA" || 
+              arr[i].country == "Brazil" || 
+              arr[i].country == "Russia" || 
+              arr[i].country == "UK" || 
               arr[i].country == "Spain" || 
               arr[i].country == "Peru" || 
-              arr[i].country == "Brazil" || 
+              arr[i].country == "India" || 
               arr[i].country == "Chile" || 
               arr[i].country == "Russia") {
             this.single.push({ "name": arr[i].country, "value": arr[i].confirmed });
@@ -194,6 +199,7 @@ export class CoronaListComponent implements OnInit {
             this.multi.push({ "name": arr[i].country, "series": series});
           }
        }
+       this.clickMessage = '';      
       }      
     }, err => {
       var errMsg = err;

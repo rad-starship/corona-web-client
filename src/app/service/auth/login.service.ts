@@ -23,8 +23,8 @@ export class LoginService {
 }
 
 class LogoutRequest {
-    refreshToken: string;
+    refresh: string;
     constructor(refresh: string) {
-        this.refreshToken = refresh;
+        this.refresh = refresh;
     }
 }

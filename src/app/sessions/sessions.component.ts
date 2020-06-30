@@ -63,7 +63,7 @@ export class SessionsComponent implements OnInit {
 
   }
 
-  onRowSelected(event: Event) {
+  onRowSelected(session: Session) {
 
   }  
 }

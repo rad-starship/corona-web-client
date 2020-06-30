@@ -19,6 +19,6 @@ export class EventsService {
 
   public delete(event: Event) {
     console.log("Event User", Event);
-    return this.http.delete<Event>(this.eventsUrl+"/"+event.id);
+    return this.http.delete<Event>(this.eventsUrl+"/"+event.time);
   }
 }

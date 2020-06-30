@@ -45,22 +45,22 @@ export class LoginComponent implements OnInit {
     }
     else if (name == "americaAdmin") {
       this.username = name;
-      this.password = "admin";
+      this.password = "a12";
       this.tenant = "America";
     }
     else if (name == "europeAdmin") {
       this.username = name;
-      this.password = "admin";
+      this.password = "a12";
       this.tenant = "Europe";
     }
     else if (name == "asiaAdmin") {
       this.username = name;
-      this.password = "admin";
+      this.password = "a12";
       this.tenant = "Asia";
     }
     else if (name == "africaAdmin") {
       this.username = name;
-      this.password = "admin";
+      this.password = "a12";
       this.tenant = "Africa";
     }               
     else if (name == "all") {

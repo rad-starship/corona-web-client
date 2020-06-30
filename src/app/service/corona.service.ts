@@ -1468,7 +1468,7 @@ export class CoronaService {
 		},
 		{
 			"date": "13/6/2020",
-			"overallTests": "749305",
+			"overallTests": "750032",
 			"critical": "35",
 			"hospitalized": "138",
 			"respiration": "26",
@@ -1477,12 +1477,84 @@ export class CoronaService {
 		},
 		{
 			"date": "14/6/2020",
-			"overallTests": "758142",
+			"overallTests": "758869",
 			"critical": "32",
 			"hospitalized": "146",
 			"respiration": "23",
 			"verified": "19123",
 			"deaths": "303"
+		},
+		{
+			"date": "15/6/2020",
+			"overallTests": "773302",
+			"critical": "36",
+			"hospitalized": "157",
+			"respiration": "25",
+			"verified": "19332",
+			"deaths": "303"
+		},
+		{
+			"date": "16/6/2020",
+			"overallTests": "789535",
+			"critical": "38",
+			"hospitalized": "159",
+			"respiration": "26",
+			"verified": "19628",
+			"deaths": "304"
+		},
+		{
+			"date": "17/6/2020",
+			"overallTests": "805554",
+			"critical": "38",
+			"hospitalized": "156",
+			"respiration": "29",
+			"verified": "19897",
+			"deaths": "304"
+		},
+		{
+			"date": "18/6/2020",
+			"overallTests": "822921",
+			"critical": "39",
+			"hospitalized": "181",
+			"respiration": "28",
+			"verified": "20201",
+			"deaths": "304"
+		},
+		{
+			"date": "19/6/2020",
+			"overallTests": "835673",
+			"critical": "39",
+			"hospitalized": "184",
+			"respiration": "29",
+			"verified": "20507",
+			"deaths": "305"
+		},
+		{
+			"date": "20/6/2020",
+			"overallTests": "841682",
+			"critical": "40",
+			"hospitalized": "208",
+			"respiration": "28",
+			"verified": "20664",
+			"deaths": "306"
+		},
+		{
+			"date": "21/6/2020",
+			"overallTests": "850755",
+			"critical": "44",
+			"hospitalized": "242",
+			"respiration": "29",
+			"verified": "20835",
+			"deaths": "306"
+		},
+		{
+			"date": "22/6/2020",
+			"overallTests": "864761",
+			"critical": "45",
+			"hospitalized": "228",
+			"respiration": "29",
+			"verified": "21177",
+			"deaths": "307"
 		}
-     ]
-	}
+	 ]
+}
