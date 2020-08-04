@@ -59,7 +59,8 @@ export class AppComponent {
 
   public userName: string;
   constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    this.userName = this.storage.get(this.STORAGE_KEY)[0].userName;
+    var currentAppData = this.storage.get(this.STORAGE_KEY) || ["unknown"];
+    this.userName = currentAppData[0].userName;
   }
 
   public setUserName(name: string) {
