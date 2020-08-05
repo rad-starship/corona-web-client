@@ -12,12 +12,14 @@ import { SeriersChildModel } from '../model/seriersChild';
 @Component({
   selector: 'app-corona-list',
   templateUrl: './corona-list.component.html',
-  styleUrls: ['./../app.component.navbar.css'],
+  styleUrls: ['./../app.component.navbar.css', './corona-list.component.css'],
   providers: [NgxChartsModule]
 })
 export class CoronaListComponent implements OnInit {
   clickMessage = ''; 
-  coronas: CoronaVirus[];
+  errMessage = ''; 
+  isInProcess: boolean;
+  coronas: CoronaVirus[];  
 
   //General
   cardColor: string = '#232837';
@@ -87,6 +89,14 @@ export class CoronaListComponent implements OnInit {
   });
   }
 
+  isStillInProcess() {
+      return this.isInProcess;
+  }
+
+  isCountryRequest() {
+    return this.countryMode;
+  }
+
   private displayCountry(country: string) {
     this.getCountryLatest(country);
   }
@@ -136,13 +146,14 @@ export class CoronaListComponent implements OnInit {
   }
 
   private getCountriesLatest(country: string) {
-    //Get Corona 
-    this.clickMessage = 'Still Loading...';      
+    this.isInProcess = true;
+    this.clickMessage = 'Still Loading Data...';      
+    this.errMessage = ''; 
 
     this.coronaService.getCountriesLatest().subscribe((data: CoronaVirus[]) => {
       if (country == "") {
         this.coronas = data;
-        //console.log("getCountriesLatest all", new Date() + ": " + JSON.stringify(data));
+        //console.log("getCountriesLatest all", new Date() + ": " + JSON.stringify(this.coronas));
       }
       else {
         var newData:CoronaVirus[];
@@ -152,7 +163,15 @@ export class CoronaListComponent implements OnInit {
             newData.push(data[i]);
         }
         this.coronas = newData;
-        //console.log("getCountriesLatest ", country, new Date() + ": " + JSON.stringify(data));
+        //console.log("getCountriesLatest ", country, new Date() + ": " + JSON.stringify(this.coronas));
+
+        if (this.coronas.length == 0)  {
+        console.log("Calculating Data Done");   
+        this.clickMessage = 'done'; 
+        this.errMessage = 'User not authorized to view this data';      
+        this.isInProcess = false;
+        return;
+        }
       }
 
       this.handleCountriesLatest(this.coronas);
@@ -164,42 +183,52 @@ export class CoronaListComponent implements OnInit {
         return b.confirmed - a.confirmed;
       });
 
+       this.clickMessage = 'Calculating Data...'; 
+       console.log("Calculating Data " + this.country + "...", arr);   
+
        this.topCountriesLatest = [];
        this.single = [];
        this.numberOfWorldsDeaths = [];
        this.multi = [];
-       for (var i = 0; i < arr.length; i++) {
+
+       if (arr.length > 0) 
        {
-         if (country != "" && arr[i].country != country)
-          continue;
+        for (var i = 0; i < arr.length; i++) {
+        {
+          console.log("Calculating Data " + i + " / " + this.country + "...");   
+          if (country != "" && arr[i].country != country)
+            continue;
 
-          this.topCountriesLatest.push({ "name": arr[i].country, "value": arr[i].confirmed });
+            this.topCountriesLatest.push({ "name": arr[i].country, "value": arr[i].confirmed });
 
-          if (arr[i].deaths >  2000)
-             this.numberOfWorldsDeaths.push({ "name": arr[i].country, "value": arr[i].deaths });
+            if (arr[i].deaths >  2000)
+              this.numberOfWorldsDeaths.push({ "name": arr[i].country, "value": arr[i].deaths });
 
-          if (arr[i].country == "USA" || 
-              arr[i].country == "Brazil" || 
-              arr[i].country == "Russia" || 
-              arr[i].country == "UK" || 
-              arr[i].country == "Spain" || 
-              arr[i].country == "Peru" || 
-              arr[i].country == "India" || 
-              arr[i].country == "Chile" || 
-              arr[i].country == "Russia") {
-            this.single.push({ "name": arr[i].country, "value": arr[i].confirmed });
-          }
+            if (arr[i].country == "USA" || 
+                arr[i].country == "Brazil" || 
+                arr[i].country == "Russia" || 
+                arr[i].country == "UK" || 
+                arr[i].country == "Spain" || 
+                arr[i].country == "Peru" || 
+                arr[i].country == "India" || 
+                arr[i].country == "Chile" || 
+                arr[i].country == "Russia") {
+              this.single.push({ "name": arr[i].country, "value": arr[i].confirmed });
+            }
 
-          if (arr[i].confirmed > 100000)
-          {
-            var series = [];
-            series.push({"name": "Confirmed", "value": arr[i].confirmed});
-            series.push({"name": "Critical", "value": arr[i].critical});
-            series.push({"name": "Deaths", "value": arr[i].deaths});
-            this.multi.push({ "name": arr[i].country, "series": series});
-          }
-       }
-       this.clickMessage = '';      
+            if (arr[i].confirmed > 100000)
+            {
+              var series = [];
+              series.push({"name": "Confirmed", "value": arr[i].confirmed});
+              series.push({"name": "Critical", "value": arr[i].critical});
+              series.push({"name": "Deaths", "value": arr[i].deaths});
+              this.multi.push({ "name": arr[i].country, "series": series});
+            }
+        }
+      }
+       console.log("Calculating Data Done");   
+       this.clickMessage = 'done';      
+       this.isInProcess = false;
       }      
     }, err => {
       var errMsg = err;
@@ -209,7 +238,8 @@ export class CoronaListComponent implements OnInit {
         if (err.error.Error != null)
           errMsg = err.error.Error; 
       }
-      this.clickMessage = 'Error Loading Error: ' + errMsg;      
+      this.clickMessage = 'Error Loading Error: ' + errMsg;  
+      this.isInProcess = false;    
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           this.clickMessage = 'Login expired. Redirect to login page...';
@@ -219,6 +249,10 @@ export class CoronaListComponent implements OnInit {
             this.router.navigate(['/']);
           },
           2000);   
+        }
+        else 
+        {
+          this.clickMessage = 'Error ' + err.status;
         }
       }      
     });

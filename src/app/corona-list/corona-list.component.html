@@ -79,9 +79,12 @@
 
 <BR><BR>
 
-<h2>{{clickMessage}}</h2><BR>
+<div *ngIf="isStillInProcess()">
+  <div class="spinner"><h2 style="color:#069">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{clickMessage}}</h2></div><BR><BR>
+</div>  
+<div><h2 style="color:red">{{errMessage}}</h2><BR></div>
 
-<div ng-show="true">
+<div *ngIf="!isCountryRequest()">
   <h2>World Currently Overall Status at {{totalsLatestDate}}</h2>
 <ngx-charts-number-card
 [view]="[600, 400]" [scheme]="colorScheme" [results]="totalsLatest" [cardColor]="cardColor" (select)="onSelect($event)"> </ngx-charts-number-card>

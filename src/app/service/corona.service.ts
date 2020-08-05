@@ -1555,6 +1555,331 @@ export class CoronaService {
 			"respiration": "29",
 			"verified": "21177",
 			"deaths": "307"
-		}
+		},
+		{
+			"date": "23/6/2020",
+			"overallTests": "884822",
+			"critical": "40",
+			"hospitalized": "216",
+			"respiration": "26",
+			"verified": "21637",
+			"deaths": "307"
+		},
+		{
+			"date": "24/6/2020",
+			"overallTests": "903213",
+			"critical": "45",
+			"hospitalized": "216",
+			"respiration": "27",
+			"verified": "22122",
+			"deaths": "307"
+		},
+		{
+			"date": "25/6/2020",
+			"overallTests": "921875",
+			"critical": "44",
+			"hospitalized": "209",
+			"respiration": "28",
+			"verified": "22635",
+			"deaths": "311"
+		},
+		{
+			"date": "26/6/2020",
+			"overallTests": "938400",
+			"critical": "45",
+			"hospitalized": "234",
+			"respiration": "26",
+			"verified": "23099",
+			"deaths": "314"
+		},
+		{
+			"date": "27/6/2020",
+			"overallTests": "948888",
+			"critical": "40",
+			"hospitalized": "236",
+			"respiration": "22",
+			"verified": "23500",
+			"deaths": "317"
+		},
+		{
+			"date": "28/6/2020",
+			"overallTests": "959277",
+			"critical": "39",
+			"hospitalized": "255",
+			"respiration": "22",
+			"verified": "23881",
+			"deaths": "318"
+		},
+		{
+			"date": "29/6/2020",
+			"overallTests": "980292",
+			"critical": "44",
+			"hospitalized": "266",
+			"respiration": "24",
+			"verified": "24633",
+			"deaths": "318"
+		},
+		{
+			"date": "30/6/2020",
+			"overallTests": "1001128",
+			"critical": "56",
+			"hospitalized": "289",
+			"respiration": "24",
+			"verified": "25413",
+			"deaths": "319"
+		},
+		{
+			"date": "01/7/2020",
+			"overallTests": "1022587",
+			"critical": "59",
+			"hospitalized": "325",
+			"respiration": "24",
+			"verified": "26380",
+			"deaths": "322"
+		},
+		{
+			"date": "02/7/2020",
+			"overallTests": "1047627",
+			"critical": "72",
+			"hospitalized": "332",
+			"respiration": "28",
+			"verified": "27524",
+			"deaths": "323"
+		},
+		{
+			"date": "03/7/2020",
+			"overallTests": "1068577",
+			"critical": "83",
+			"hospitalized": "349",
+			"respiration": "29",
+			"verified": "28468",
+			"deaths": "325"
+		},
+		{
+			"date": "04/7/2020",
+			"overallTests": "1085883",
+			"critical": "85",
+			"hospitalized": "360",
+			"respiration": "33",
+			"verified": "29289",
+			"deaths": "329"
+		},
+		{
+			"date": "05/7/2020",
+			"overallTests": "1106976",
+			"critical": "94",
+			"hospitalized": "416",
+			"respiration": "32",
+			"verified": "30128",
+			"deaths": "330"
+		},
+		{
+			"date": "06/7/2020",
+			"overallTests": "1132568",
+			"critical": "91",
+			"hospitalized": "436",
+			"respiration": "34",
+			"verified": "31264",
+			"deaths": "336"
+		},
+		{
+			"date": "07/7/2020",
+			"overallTests": "1161162",
+			"critical": "93",
+			"hospitalized": "462",
+			"respiration": "35",
+			"verified": "32650",
+			"deaths": "341"
+		},
+		{
+			"date": "08/7/2020",
+			"overallTests": "1190547",
+			"critical": "112",
+			"hospitalized": "485",
+			"respiration": "38",
+			"verified": "33971",
+			"deaths": "346"
+		},
+		{
+			"date": "09/7/2020",
+			"overallTests": "1220591",
+			"critical": "127",
+			"hospitalized": "541",
+			"respiration": "41",
+			"verified": "35492",
+			"deaths": "349"
+		},
+		{
+			"date": "10/7/2020",
+			"overallTests": "1246433",
+			"critical": "132",
+			"hospitalized": "555",
+			"respiration": "41",
+			"verified": "36902",
+			"deaths": "353"
+		},
+		{
+			"date": "11/7/2020",
+			"overallTests": "1266879",
+			"critical": "137",
+			"hospitalized": "560",
+			"respiration": "47",
+			"verified": "38063",
+			"deaths": "357"
+		},
+		{
+			"date": "12/7/2020",
+			"overallTests": "1288611",
+			"critical": "153",
+			"hospitalized": "637",
+			"respiration": "47",
+			"verified": "39307",
+			"deaths": "363"
+		},
+		{
+			"date": "13/7/2020",
+			"overallTests": "1317894",
+			"critical": "184",
+			"hospitalized": "647",
+			"respiration": "53",
+			"verified": "41022",
+			"deaths": "366"
+		},
+		{
+			"date": "14/7/2020",
+			"overallTests": "1349633",
+			"critical": "190",
+			"hospitalized": "633",
+			"respiration": "55",
+			"verified": "42625",
+			"deaths": "371"
+		},
+		{
+			"date": "15/7/2020",
+			"overallTests": "1380313",
+			"critical": "209",
+			"hospitalized": "669",
+			"respiration": "57",
+			"verified": "44504",
+			"deaths": "376"
+		},
+		{
+			"date": "16/7/2020",
+			"overallTests": "1411378",
+			"critical": "210",
+			"hospitalized": "683",
+			"respiration": "60",
+			"verified": "46435",
+			"deaths": "385"
+		},
+		{
+			"date": "17/7/2020",
+			"overallTests": "1437085",
+			"critical": "219",
+			"hospitalized": "693",
+			"respiration": "58",
+			"verified": "48036",
+			"deaths": "395"
+		},
+		{
+			"date": "18/7/2020",
+			"overallTests": "1457550",
+			"critical": "236",
+			"hospitalized": "697",
+			"respiration": "57",
+			"verified": "49478",
+			"deaths": "402"
+		},
+		{
+			"date": "19/7/2020",
+			"overallTests": "1477396",
+			"critical": "272",
+			"hospitalized": "811",
+			"respiration": "74",
+			"verified": "50494",
+			"deaths": "409"
+		},
+		{
+			"date": "20/7/2020",
+			"overallTests": "1504896",
+			"critical": "269",
+			"hospitalized": "810",
+			"respiration": "79",
+			"verified": "52385",
+			"deaths": "418"
+		},
+		{
+			"date": "21/7/2020",
+			"overallTests": "1535066",
+			"critical": "262",
+			"hospitalized": "794",
+			"respiration": "81",
+			"verified": "54388",
+			"deaths": "427"
+		},
+		{
+			"date": "22/7/2020",
+			"overallTests": "1563876",
+			"critical": "287",
+			"hospitalized": "785",
+			"respiration": "80",
+			"verified": "56431",
+			"deaths": "432"
+		},
+		{
+			"date": "23/7/2020",
+			"overallTests": "1596400",
+			"critical": "314",
+			"hospitalized": "804",
+			"respiration": "84",
+			"verified": "58417",
+			"deaths": "446"
+		},
+		{
+			"date": "24/7/2020",
+			"overallTests": "1620792",
+			"critical": "329",
+			"hospitalized": "799",
+			"respiration": "86",
+			"verified": "60249",
+			"deaths": "452"
+		},
+		{
+			"date": "25/7/2020",
+			"overallTests": "1636257",
+			"critical": "324",
+			"hospitalized": "797",
+			"respiration": "99",
+			"verified": "61362",
+			"deaths": "459"
+		},
+		{
+			"date": "26/7/2020",
+			"overallTests": "1648441",
+			"critical": "313",
+			"hospitalized": "874",
+			"respiration": "99",
+			"verified": "62406",
+			"deaths": "470"
+		},
+		{
+			"date": "27/7/2020",
+			"overallTests": "1676674",
+			"critical": "322",
+			"hospitalized": "898",
+			"respiration": "96",
+			"verified": "64461",
+			"deaths": "475"
+		},
+		{
+			"date": "28/7/2020",
+			"overallTests": "1702868",
+			"critical": "326",
+			"hospitalized": "888",
+			"respiration": "97",
+			"verified": "66562",
+			"deaths": "483"
+		}		
 	 ]
 }
+
