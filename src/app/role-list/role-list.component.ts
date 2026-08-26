@@ -10,6 +10,7 @@ import { Router} from '@angular/router';
  
 @Component({
   selector: 'app-role-list',
+  standalone: false,
   templateUrl: './role-list.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

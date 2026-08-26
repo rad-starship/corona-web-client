@@ -11,6 +11,7 @@ import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-form',
+  standalone: false,
   templateUrl: './user-form.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

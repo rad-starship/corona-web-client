@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Tenant } from '../model/tenant';
-import { Observable } from 'rxjs/Observable';
-import { stringify } from 'querystring';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TenantService {

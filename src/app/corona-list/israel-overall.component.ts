@@ -1,13 +1,14 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CoronaService } from '../service/corona.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Color, LegendPosition, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { ChartDataModel } from '../model/chartData';
 import { SerieModel } from '../model/seriel';
 import { SeriersChildModel } from '../model/seriersChild';
 
 @Component({
   selector: 'app-israel-overall',
+  standalone: false,
   templateUrl: './israel-overall.component.html',
   styleUrls: ['./../app.component.navbar.css'],
   providers: [NgxChartsModule]
@@ -26,8 +27,8 @@ export class IsraelOverallComponent implements OnInit {
   overall: any[];
   overallGauge: any[];
   overallDate: string;
-  view: any[] = [1000, 600];
-  viewCard: any[] = [700, 400];
+  view: [number, number] = [1000, 600];
+  viewCard: [number, number] = [700, 400];
 
   // options
   legend: boolean = true;
@@ -41,9 +42,12 @@ export class IsraelOverallComponent implements OnInit {
   yAxisLabel: string = 'Population';
   timeline: boolean = true;
   cardColor: string = '#232837';
-  legendPosition: string = 'below';
+  legendPosition: LegendPosition = LegendPosition.Below;
 
-  colorScheme = {
+  colorScheme: Color = {
+    name: 'israel-overall',
+    selectable: true,
+    group: ScaleType.Ordinal,
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };  
   

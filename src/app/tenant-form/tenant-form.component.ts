@@ -11,6 +11,7 @@ import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-tenant-form',
+  standalone: false,
   templateUrl: './tenant-form.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

@@ -3,11 +3,11 @@ import { Router} from '@angular/router';
 import { SettingsService } from './../service/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { Settings, Authentication, Authorization, Token, PasswordPolicy, OtpPolicy, SocialLogin } from '../model/settings';
-import {MatDialog, MatDialogConfig} from "@angular/material";
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
+  standalone: false,
   templateUrl: './settings.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })
@@ -20,8 +20,7 @@ export class SettingsComponent implements OnInit {
 
   constructor (private router: Router, 
                private settingsService: SettingsService,
-               private formBuilder: FormBuilder, 
-               private dialog: MatDialog) {
+               private formBuilder: FormBuilder) {
     this.model = new Settings(new Authentication(new Token(30, 500, 1500, 20), 
                                                  new PasswordPolicy(365, 8, 3, 1, true), 
                                                  new OtpPolicy(false, "Time Based", 8, 30), 

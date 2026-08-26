@@ -10,6 +10,7 @@ import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
+  standalone: false,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

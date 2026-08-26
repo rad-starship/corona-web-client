@@ -10,8 +10,7 @@
 */
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Inject, Injectable, OnInit } from '@angular/core';
-import { tokenNotExpired } from 'angular2-jwt';
-import * as jwt_decode from "jwt-decode";
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Injectable()
@@ -26,8 +25,8 @@ export class AuthService implements OnInit
 
     constructor(private http: HttpClient, 
                @Inject(LOCAL_STORAGE) private storage: StorageService) {
-      var currentAppData = this.storage.get(this.STORAGE_KEY) || [];
-      var firstAppData = currentAppData[0] || "";
+      const currentAppData = this.storage.get(this.STORAGE_KEY) || [];
+      const firstAppData = currentAppData[0] || {};
       this.token = firstAppData.token;
       this.refresh_token = firstAppData.refreshToken;
       //console.log("AuthService init Token", this.token);
@@ -69,27 +68,22 @@ export class AuthService implements OnInit
       return this.refresh_token;
     }
 
-    private getDecodedAccessToken(): any {
-      try {
-          var tokenInfo = jwt_decode(this.token); // decode token
-          console.log(tokenInfo);
-          
-          // decode header by passing in options (useful for when you need `kid` to verify a JWT):
-          var decodedHeader = jwt_decode(this.token, { header: true });
-          console.log(decodedHeader)
-
-          return tokenInfo;
+    private getDecodedAccessToken(): JwtPayload | null {
+      if (!this.token) {
+        return null;
       }
-      catch(Error){
+
+      try {
+          return jwtDecode<JwtPayload>(this.token);
+      }
+      catch (error) {
+          console.error('Failed to decode access token', error);
           return null;
       }
     }
 
     private isAuthenticated(): boolean {
-      // get the token
-      const token = this.getToken();
-      // return a boolean reflecting 
-      // whether or not the token is expired
-      return tokenNotExpired(null, token);
+      const decodedToken = this.getDecodedAccessToken();
+      return !!decodedToken?.exp && decodedToken.exp * 1000 > Date.now();
     }
 }
