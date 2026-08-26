@@ -10,6 +10,7 @@ import { RoleService } from '../service/role.service';
 
 @Component({
   selector: 'app-user-list',
+  standalone: false,
   templateUrl: './user-list.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

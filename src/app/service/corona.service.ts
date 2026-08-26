@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CoronaVirus } from '../model/coronaVirus';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 export interface SingleValue {
   name: string;
@@ -1882,4 +1882,3 @@ export class CoronaService {
 		}		
 	 ]
 }
-

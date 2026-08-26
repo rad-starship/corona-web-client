@@ -1,4 +1,3 @@
-import { identifierModuleUrl } from '@angular/compiler';
 
 export class LoginRequest {
     username: string;
@@ -13,4 +12,3 @@ export class LoginRequest {
         this.tenant = tenant;
     }
 }
-

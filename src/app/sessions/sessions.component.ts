@@ -6,6 +6,7 @@ import { SessionService } from '../service/session.service';
 
 @Component({
   selector: 'app-sessions',
+  standalone: false,
   templateUrl: './sessions.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

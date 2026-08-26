@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { Inject, Injectable, OnInit } from '@angular/core';
-import { AppModule } from './app.module';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { Inject } from '@angular/core';
 import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 // import * as Keycloak from 'keycloak-js'
@@ -50,6 +48,7 @@ import { LOCAL_STORAGE, StorageService } from 'ngx-webstorage-service';
 
 @Component({
   selector: 'app-root',
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
@@ -59,14 +58,14 @@ export class AppComponent {
 
   public userName: string;
   constructor(@Inject(LOCAL_STORAGE) private storage: StorageService) {
-    var currentAppData = this.storage.get(this.STORAGE_KEY) || ["unknown"];
-    this.userName = currentAppData[0].userName;
+    const currentAppData = this.storage.get(this.STORAGE_KEY) || [];
+    this.userName = currentAppData[0]?.userName ?? 'unknown';
   }
 
   public setUserName(name: string) {
     this.userName = name;
 
-    var currentAppData = this.storage.get(this.STORAGE_KEY) || [];
+    let currentAppData = this.storage.get(this.STORAGE_KEY) || [];
     currentAppData = [];
     // push new task to array
     currentAppData.push({

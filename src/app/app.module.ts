@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //https://swimlane.gitbook.io/ngx-charts/
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CustomMaterialModule } from './core/material.module';
-import { MatDialogModule} from "@angular/material";
 
 import { CommonModule } from '@angular/common';
 
@@ -64,7 +63,6 @@ import { SettingsService } from './service/settings.service';
     SessionsComponent,
     SettingsComponent ],
   imports: [
-    MatDialogModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,

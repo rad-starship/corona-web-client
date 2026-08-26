@@ -1,5 +1,3 @@
-import { NumberCardModule } from '@swimlane/ngx-charts';
-
 export class Settings {
     authentication: Authentication;
     authorization: Authorization

@@ -12,6 +12,7 @@ import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-role-form',
+  standalone: false,
   templateUrl: './role-form.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

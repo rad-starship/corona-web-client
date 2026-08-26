@@ -4,13 +4,14 @@ import { AppComponent } from './../app.component';
 import { Component, OnInit } from '@angular/core';
 import { CoronaVirus } from '../model/coronaVirus';
 import { CoronaService } from '../service/corona.service';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Color, LegendPosition, NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { ChartDataModel } from '../model/chartData';
 import { SerieModel } from '../model/seriel';
 import { SeriersChildModel } from '../model/seriersChild';
 
 @Component({
   selector: 'app-corona-list',
+  standalone: false,
   templateUrl: './corona-list.component.html',
   styleUrls: ['./../app.component.navbar.css', './corona-list.component.css'],
   providers: [NgxChartsModule]
@@ -34,7 +35,7 @@ export class CoronaListComponent implements OnInit {
         data: []
       };
 
-  view: any[] = [800, 600];
+  view: [number, number] = [800, 600];
 
   // options for the chart
   showXAxis = true;
@@ -49,8 +50,11 @@ export class CoronaListComponent implements OnInit {
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legend: boolean = true;
-  legendPosition: string = 'below';
-  colorScheme = {
+  legendPosition: LegendPosition = LegendPosition.Below;
+  colorScheme: Color = {
+    name: 'totals',
+    selectable: true,
+    group: ScaleType.Ordinal,
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB']
   };
 

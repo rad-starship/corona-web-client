@@ -7,10 +7,10 @@ import { TenantService } from '../service/tenant.service';
 import { Role } from '../model/role';
 import { RoleService } from '../service/role.service';
 import { Router} from '@angular/router';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-tenant-list',
+  standalone: false,
   templateUrl: './tenant-list.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

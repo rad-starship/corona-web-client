@@ -6,6 +6,7 @@ import { HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-events',
+  standalone: false,
   templateUrl: './events.component.html',
   styleUrls: ['./../app.component.navbar.css']
 })

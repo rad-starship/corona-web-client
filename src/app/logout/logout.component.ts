@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-logout',
+  standalone: false,
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.css']
 })
